@@ -1,0 +1,119 @@
+{
+  "layout": {
+    "default": {
+      "nav": {
+        "store": "Store",
+        "ads": "Advertise",
+        "contact": "Contact",
+        "login": "Login",
+        "register": "Register",
+        "search": "Search",
+        "profileView": "View profile",
+        "profileEdit": "Edit profile",
+        "logout": "Logout"
+      },
+      "footer": {
+        "about": "ABOUT Dr.Revalida",
+        "description": "Dr.Revalida does not perform medical treatments. Integrative, complementary and holistic therapists are not doctors, they do not diagnose or cure diseases. All information about therapists is provided by them, and are their full responsibility.",
+        "legal": "Legal",
+        "language": "Language",
+        "theme": "theme",
+        "followUs": "Follow us",
+        "followUsCTA": "Dr.Revalida is a free service from Oficina Emocional",
+        "copy": "All rights reserved"
+      }
+    }
+  },
+  "pages": {
+    "index": {
+      "title": "Find Integrative, Complementary and Holistic Therapists",
+      "ctaRegister": "Therapist, click here and register for free",
+      "statistic": {
+        "one": "Therapists",
+        "two": "Therapeutic specialties",
+        "three": "Searches made"
+      },
+      "third": {
+        "title": {
+          "1": "Therapist, create your profile for free",
+          "2": "and enjoy the benefits"
+        },
+        "1": {
+          "h4": "More visibility in the market",
+          "p": "Your work could become known to thousands of people who previously didn't know where to find you"
+        },
+        "2": {
+          "h4": "Provide your work in a professional manner",
+          "p": "You can have your own personalized page within the Acho Therapy portal, with your complete profile"
+        },
+        "3": {
+          "h4": "Information and collaboration",
+          "p": "A community with first-hand information about courses, lectures, training, products and services"
+        }
+      },
+      "fourth": {
+        "title": {
+          "1": "Achieve Therapy is based on ",
+          "2": "three main pillars"
+        },
+        "1": {
+          "h4": "Must be a professional",
+          "p": "Therapist, facilitator, coach, physician or other practitioner of integrative, complementary and holistic health"
+        },
+        "2": {
+          "h4": "Without mixing things up",
+          "p": "It is forbidden to offer mystical and/or spiritual services. The portal's concept is focused on health services"
+        },
+        "3": {
+          "h4": "Unconventional",
+          "p": "Conventional health professionals are not allowed. This portal is exclusively for integrative, complementary and holistic practices"
+        }
+      },
+      "fifth": {
+        "title": {
+          "1": "This is a project",
+          "2": "innovative",
+          "3": "with the following",
+          "4": "goals"
+        },
+        "1": {
+          "h4": "Connect therapists and patients",
+          "p": "Ensure that anyone can find a therapist who can help, and that they know what to expect from integrative, complementary or holistic treatment."
+        },
+        "2": {
+          "h4": "Demystify and popularize",
+          "p": "Explain and disseminate integrative, complementary and holistic therapies, providing quality information about what each therapy is and how it works."
+        },
+        "3": {
+          "h4": "Create a serious and committed identity",
+          "p": "Introduce professionals focused on integral health, who work together with medicine and based on science, without “travel”."
+        }
+      },
+      "action": {
+        "title": "Register for free as a therapist"
+      },
+      "faq": {
+        "title": "Frequently Asked Questions"
+      },
+      "model": {
+        "title": {
+          "1": "title",
+          "2": "span"
+        },
+        "1": {
+          "h4": "title",
+          "p": "description"
+        }
+      }
+    }
+  },
+  "components": {
+    "searchTherapist": {
+      "placeholder": "Search by name, location, therapy or treatment",
+      "btn": "Search"
+    }
+  },
+  "words": {
+    "register": "Register"
+  }
+}

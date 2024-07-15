@@ -1,0 +1,61 @@
+{
+    "name": "dr-devalida-platform",
+    "private": true,
+    "type": "module",
+    "overrides": {
+        "vue": "latest"
+    },
+    "scripts": {
+        "build": "nuxt build",
+        "analyze": "nuxt build --analyze",
+        "dev": "nuxt dev",
+        "start": "nuxt start",
+        "generate": "nuxt generate",
+        "preview": "nuxt preview",
+        "postinstall": "nuxt prepare"
+    },
+    "devDependencies": {
+        "@nuxtjs/color-mode": "^3.4.1",
+        "@nuxtjs/i18n": "^8.3.1",
+        "@nuxtjs/tailwindcss": "^6.12.0",
+        "@pinia-plugin-persistedstate/nuxt": "^1.2.0",
+        "@tailwindcss/forms": "^0.5.7",
+        "@tailwindcss/typography": "^0.5.13",
+        "@types/node": "^18",
+        "nuxt": "^3.12.2",
+        "nuxt-api-party": "^2.0.7",
+        "nuxt-headlessui": "^1.2.0",
+        "nuxt-icon": "^0.6.10",
+        "nuxt-lodash": "^2.5.3",
+        "sass": "^1.77.6",
+        "sass-loader": "^14.2.1"
+    },
+    "dependencies": {
+        "@pinia/nuxt": "^0.5.1",
+        "@splidejs/vue-splide": "^0.6.12",
+        "@vee-validate/nuxt": "^4.13.1",
+        "@vee-validate/yup": "^4.13.1",
+        "axios": "^1.7.2",
+        "chart.js": "^4.4.3",
+        "compressorjs": "^1.2.1",
+        "dayjs": "^1.11.11",
+        "firebase": "^10.12.2",
+        "maska": "^2.1.9",
+        "pinia": "^2.1.7",
+        "socket.io-client": "^4.7.5",
+        "vee-validate": "^4.13.1",
+        "video.js": "^8.12.0",
+        "vue-advanced-cropper": "^2.8.9",
+        "vue-chartjs": "^5.3.1",
+        "vue-easy-lightbox": "^1.19.0",
+        "vue3-easy-data-table": "^1.5.47",
+        "vue3-otp-input": "^0.5.21",
+        "yup": "^1.4.0",
+        "yup-password": "^0.4.0"
+    },
+    "browserslist": [
+        "> 0.1%",
+        "last 2 versions",
+        "not dead"
+    ]
+}

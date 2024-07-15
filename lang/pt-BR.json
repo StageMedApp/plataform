@@ -1,0 +1,128 @@
+{
+  "layout": {
+    "default": {
+      "nav": {
+        "store": "Loja",
+        "ads": "Anúncio",
+        "contact": "Contato",
+        "login": "Fazer Login",
+        "register": "Cadastre-se",
+        "search": "Pesquisar",
+        "profileView": "Visualizar Perfil",
+        "profileEdit": "Editar Perfil",
+        "logout": "Sair"
+      },
+      "footer": {
+        "about": "SOBRE O DR.REVALIDA",
+        "description": "O Dr.Revalida não realiza tratamentos médicos. Os terapeutas integrativos, complementares e holísticos não são médicos, não fornecem diagnóstico nem cura de doenças. Todas as informações sobre terapeutas são fornecidas pelos mesmos, e são de sua total responsabilidade.",
+        "legal": "Legal",
+        "language": "Idioma",
+        "theme": "Tema",
+        "followUs": "Siga-nos",
+        "followUsCTA": "Dr.Revalida é um serviço gratuito da Oficina Emocional",
+        "copy": "Todos os direitos reservados"
+      }
+    }
+  },
+  "pages": {
+    "index": {
+      "title": "Encontre o terapeuta integrativo especifico para sua necessidade!",
+      "desc": "Nossa plataforma oferece acesso a uma variedade de terapeutas, tanto presenciais quanto online, para atender às suas necessidades individuais. Todos profissionais altamente qualificados, prontos para apoiar você em sua jornada de bem-estar e autocuidado",
+      "ctaRegister": "Terapeuta, clique aqui e cadastre-se grátis",
+      "ads": "anúncios",
+      "hero": {
+        "title": "Encontre o terapeuta integrativo especifico para sua necessidade!",
+        "description": "Nossa plataforma oferece acesso a uma variedade de terapeutas, tanto presenciais quanto online, para atender às suas necessidades individuais. Todos profissionais altamente qualificados, prontos para apoiar você em sua jornada de bem-estar e autocuidado"
+      },
+      "statistic": {
+        "one": "Terapeutas",
+        "two": "Especialidades teraupêuticas",
+        "three": "Buscas realizadas"
+      },
+      "third": {
+        "title": {
+          "1": "Terapeuta, crie seu perfil gratuitamente",
+          "2": "e aproveite os beneficios"
+        },
+        "1": {
+          "h4": "Mais visibilidade no mercado",
+          "p": "Seu trabalho poderá se tornar conhecido por milhares de pessoas que antes não sabiam onde te encontrar"
+        },
+        "2": {
+          "h4": "Divulgar seu trabalho de forma profissional",
+          "p": "Você pode ter a sua própria página personalizada dentro do portal Dr.Revalida, com o seu perfil completo"
+        },
+        "3": {
+          "h4": "Informação e colaboração",
+          "p": "Uma comunidade com informações sobre cursos, palestras, treinamentos, produtos e serviços em primeira mão"
+        }
+      },
+      "fourth": {
+        "title": {
+          "1": "O Dr.Revalida é baseado em ",
+          "2": "três pilares principais"
+        },
+        "1": {
+          "h4": "Tem que ser um profissional",
+          "p": "Terapeuta, facilitador, coach, médico ou outro profissional da saúde integrativa, complementar e holística"
+        },
+        "2": {
+          "h4": "Sem misturar as coisas",
+          "p": "É proibido oferecer serviços místicos e/ou espirituais. O conceito do portal é focado em serviços de saúde"
+        },
+        "3": {
+          "h4": "Não Convencional",
+          "p": "Não são permitidos profissionais de saúde convencional. Este portal é exclusivo para práticas integrativas, complementares e holísticas"
+        }
+      },
+      "fifth": {
+        "title": {
+          "1": "Este é um projeto",
+          "2": "inovador",
+          "3": "com os seguintes",
+          "4": "objetivos"
+        },
+        "1": {
+          "h4": "Conectar terapeutas e pacientes",
+          "p": "Garantir que qualquer pessoa possa encontrar um terapeuta que possa ajudar, e que ele saiba o que esperar de um tratamento integrativo, complementar ou holístico."
+        },
+        "2": {
+          "h4": "Desmistificar e popularizar",
+          "p": "Explicar e divulgar as terapias integrativas, complementares e holísticas, levando informação de qualidade sobre o que é e como funciona cada terapia."
+        },
+        "3": {
+          "h4": "Criar uma identidade séria e comprometida",
+          "p": "Apresentar profissionais focados na saúde integral, que trabalham em conjunto com a medicina e embasados pela ciência, sem “viagem”."
+        }
+      },
+      "action": {
+        "title": "Faça seu cadastro gratuito como Terapeuta"
+      },
+      "faq": {
+        "title": "Perguntas frequentes"
+      },
+      "model": {
+        "title": {
+          "1": "title",
+          "2": "span"
+        },
+        "1": {
+          "h4": "title",
+          "p": "description"
+        }
+      }
+    }
+  },
+  "components": {
+    "searchTherapist": {
+      "placeholder": {
+        "search": "Busque por nome, categoria...",
+        "city": "Cidade"
+      },
+      "btn": "Buscar"
+    }
+  },
+  "words": {
+    "resgister": "Fazer cadastro"
+  }
+}

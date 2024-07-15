@@ -1,0 +1,17 @@
+/* Accordion */
+.accordion-enter-active,
+.accordion-leave-active {
+  transition: all 0.35s ease;
+  transition-delay: 100ms;
+  overflow: hidden;
+}
+.accordion-enter-from,
+.accordion-leave-to {
+  opacity: 0;
+  max-height: 0;
+}
+.accordion-leave-from,
+.accordion-enter-to {
+  opacity: 0;
+  max-height: 350px;
+}

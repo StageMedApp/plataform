@@ -1,0 +1,119 @@
+{
+  "layout": {
+    "default": {
+      "nav": {
+        "store": "Almacenar",
+        "ads": "Anunciar",
+        "contact": "Contacto",
+        "login": "Hacer login",
+        "register": "Registro",
+        "search": "Buscar",
+        "profileView": "Ver perfil",
+        "profileEdit": "Editar perfil",
+        "logout": "Salir"
+      },
+      "footer": {
+        "about": "ACERCA DE Dr.Revalida",
+        "description": "Dr.Revalida no realiza tratamientos médicos. Los terapeutas integradores, complementarios y holísticos no son médicos, no diagnostican ni curan enfermedades. Toda la información sobre los terapeutas es proporcionada por ellos, y es de su entera responsabilidad.",
+        "legal": "Legal",
+        "language": "Idioma",
+        "theme": "Tema",
+        "followUs": "Síganos",
+        "followUsCTA": "Dr.Revalida es un servicio gratuito de Taller Emocional",
+        "copy": "Reservados todos los derechos"
+      }
+    }
+  },
+  "pages": {
+    "index": {
+      "title": "Encuentre terapeutas integrales, complementarios y holísticos",
+      "ctaRegister": "Terapeuta, haz clic aquí y regístrate gratis",
+      "statistic": {
+        "one": "Terapeutas",
+        "two": "Especialidades terapéuticas",
+        "three": "Búsquedas realizadas"
+      },
+      "third": {
+        "title": {
+          "1": "Terapeuta, crea tu perfil gratis",
+          "2": "y disfruta de los beneficios"
+        },
+        "1": {
+          "h4": "Más visibilidad en el mercado",
+          "p": "Tu trabajo puede llegar a ser conocido por miles de personas que antes no sabían dónde encontrarte"
+        },
+        "2": {
+          "h4": "Promociona tu trabajo profesionalmente",
+          "p": "Puedes tener tu propia página personalizada dentro del portal de Dr.Revalida, con tu perfil completo"
+        },
+        "3": {
+          "h4": "información y colaboración",
+          "p": "Una comunidad con información de primera mano sobre cursos, charlas, capacitaciones, productos y servicios"
+        }
+      },
+      "fourth": {
+        "title": {
+          "1": "La Dr.Revalida se basa en",
+          "2": "tres pilares fundamentales"
+        },
+        "1": {
+          "h4": "Tienes que ser un profesional",
+          "p": "Terapeuta, facilitador, entrenador, médico u otro profesional de la salud integral, complementaria y holística"
+        },
+        "2": {
+          "h4": "Sin mezclar las cosas",
+          "p": "Está prohibido ofrecer servicios místicos y/o espirituales. El concepto del portal está enfocado a los servicios de salud"
+        },
+        "3": {
+          "h4": "No convencional",
+          "p": "No se permiten profesionales de la salud convencionales. Este portal es exclusivamente para prácticas integradoras, complementarias y holísticas."
+        }
+      },
+      "fifth": {
+        "title": {
+          "1": "Este es un proyecto",
+          "2": "innovador",
+          "3": "con lo siguiente",
+          "4": "objetivos"
+        },
+        "1": {
+          "h4": "Conectar terapeutas y pacientes",
+          "p": "Asegúrate de que cualquier persona pueda encontrar un terapeuta que pueda ayudar y que sepa qué esperar de un tratamiento integrador, complementario u holístico."
+        },
+        "dos": {
+          "h4": "Desmitificar y popularizar",
+          "p": "Explicar y difundir terapias integradoras, complementarias y holísticas, brindando información de calidad sobre qué es cada terapia y cómo funciona."
+        },
+        "3": {
+          "h4": "Crear una identidad seria y comprometida",
+          "p": "Presentamos profesionales enfocados en la salud integral, que trabajen en conjunto con la medicina y con base en la ciencia, sin “viajes”."
+        }
+      },
+      "acción": {
+        "title": "Registrarse gratis como terapeuta"
+      },
+      "Preguntas más frecuentes": {
+        "title": "Preguntas frecuentes"
+      },
+      "modelo": {
+        "título": {
+          "1": "título",
+          "2": "intervalo"
+        },
+        "1": {
+          "h4": "título",
+          "p": "descripción"
+        }
+      }
+    }
+  },
+  "components": {
+    "searchTherapist": {
+      "placeholder": "Buscar por nombre, ubicación, terapia o tratamiento",
+      "btn": "Buscar"
+    }
+  },
+  "words": {
+    "resgister": "Inscribirse"
+  }
+}
