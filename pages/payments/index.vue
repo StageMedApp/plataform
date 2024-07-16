@@ -111,7 +111,7 @@
                         :key="benefit"
                         class="flex space-x-3 items-center"
                         :class="[
-                          !benefit.included && 'line-through decoration-gray-500',
+                          !benefit.included && 'line-through decoration-neutral-500',
                           plan.isBest ? 'text-white' : 'text-primary-950',
                         ]"
                       >
@@ -215,7 +215,7 @@
                 v-for="benefit in currentPlan.benefits"
                 :key="benefit"
                 class="flex space-x-3 items-center"
-                :class="[!benefit.included && 'line-through decoration-gray-500']"
+                :class="[!benefit.included && 'line-through decoration-neutral-500']"
               >
                 <svg
                   class="flex-shrink-0 w-4 h-4"
@@ -248,24 +248,24 @@
         </div>
 
         <div class="overflow-x-auto" v-if="activity?.data?.length > 0">
-          <table class="w-full divide-y-2 divide-gray-200 bg-white text-sm">
+          <table class="w-full divide-y-2 divide-neutral-200 bg-white text-sm">
             <thead class="text-left">
               <tr>
-                <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Order</th>
-                <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Data</th>
-                <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Status</th>
-                <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Valor</th>
+                <th class="whitespace-nowrap px-4 py-2 font-medium text-neutral-900">Order</th>
+                <th class="whitespace-nowrap px-4 py-2 font-medium text-neutral-900">Data</th>
+                <th class="whitespace-nowrap px-4 py-2 font-medium text-neutral-900">Status</th>
+                <th class="whitespace-nowrap px-4 py-2 font-medium text-neutral-900">Valor</th>
               </tr>
             </thead>
 
-            <tbody class="divide-y divide-gray-200" v-for="item in activity.data">
+            <tbody class="divide-y divide-neutral-200" v-for="item in activity.data">
               <tr>
-                <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">#{{ item.invoiceNumber }}</td>
-                <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                <td class="whitespace-nowrap px-4 py-2 font-medium text-neutral-900">#{{ item.invoiceNumber }}</td>
+                <td class="whitespace-nowrap px-4 py-2 text-neutral-700">
                   {{ dayjs(item.created_at).format("DD/MM/YYYY") }}
                 </td>
-                <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ item.status }}</td>
-                <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ getPrice(item.value) }}</td>
+                <td class="whitespace-nowrap px-4 py-2 text-neutral-700">{{ item.status }}</td>
+                <td class="whitespace-nowrap px-4 py-2 text-neutral-700">{{ getPrice(item.value) }}</td>
               </tr>
             </tbody>
           </table>

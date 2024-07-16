@@ -6,7 +6,11 @@
         :class="{ 'bg-neutral-50 shadow-medium': open }"
       >
         <span class="title title--h4">{{ item.title }}</span>
-        <Icon name="solar:alt-arrow-down-linear" :class="{ 'rotate-180 transform ': open }" class="text-xl transition" />
+        <Icon
+          name="solar:alt-arrow-down-linear"
+          :class="{ 'rotate-180 transform ': open }"
+          class="text-xl transition"
+        />
       </DisclosureButton>
       <transition
         enter-active-class="transition duration-200 ease-out"
@@ -16,7 +20,7 @@
         leave-from-class="translate-y-0 opacity-100"
         leave-to-class="translate-y-1 opacity-0"
       >
-        <DisclosurePanel class="p-4 mb-4 text-sm text-gray-500">
+        <DisclosurePanel class="p-4 mb-4 text-sm text-neutral-500">
           <div v-html="item.content"></div>
         </DisclosurePanel>
       </transition>

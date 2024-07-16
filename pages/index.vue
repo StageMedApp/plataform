@@ -133,7 +133,7 @@
                 <Icon name="solar:alt-arrow-left-linear" size="16" />
               </Button>
 
-              <p v-if="false" class="text-xs text-gray-900">
+              <p v-if="false" class="text-xs text-neutral-900">
                 {{ page }}
                 <span class="mx-0.25">/</span>
                 12
@@ -147,7 +147,9 @@
         </div>
 
         <div class="lg:col-span-4">
-          <div class="card mb-6">
+          <Button to="/activity"> Criar nova estação </Button>
+
+          <div class="card mb-6 mt-4">
             <div class="title title--card-sm mb-4">Pesquise pessoas</div>
 
             <div class="relative">

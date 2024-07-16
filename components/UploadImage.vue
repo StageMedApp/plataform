@@ -19,10 +19,18 @@
 
     <div class="flex items-center justify-between p-4 h-20">
       <div class="flex items-center gap-2">
-        <Button icon color="linkWhite" @click="flip(true, false)"> <Icon name="fluent:flip-horizontal-24-regular" /> </Button>
-        <Button icon color="linkWhite" @click="flip(false, true)"> <Icon name="fluent:flip-vertical-24-regular" /></Button>
-        <Button icon color="linkWhite" @click="rotate(90)"> <Icon name="fluent:arrow-rotate-clockwise-24-regular" /> </Button>
-        <Button icon color="linkWhite" @click="rotate(-90)"> <Icon name="fluent:arrow-rotate-counterclockwise-24-regular" /> </Button>
+        <Button icon color="linkWhite" @click="flip(true, false)">
+          <Icon name="fluent:flip-horizontal-24-regular" />
+        </Button>
+        <Button icon color="linkWhite" @click="flip(false, true)">
+          <Icon name="fluent:flip-vertical-24-regular"
+        /></Button>
+        <Button icon color="linkWhite" @click="rotate(90)">
+          <Icon name="fluent:arrow-rotate-clockwise-24-regular" />
+        </Button>
+        <Button icon color="linkWhite" @click="rotate(-90)">
+          <Icon name="fluent:arrow-rotate-counterclockwise-24-regular" />
+        </Button>
       </div>
       <div class="right">
         <Button color="linkWhite" @click="crop()">Salvar</Button>
@@ -226,7 +234,7 @@ export default {
   }
   &.disabled,
   &.disabled:hover {
-    background: rgba(var(--color-rbg-gray-200), 0.5);
+    background: rgba(var(--color-rbg-neutral-200), 0.5);
     border: 1px dashed rgba(var(--color-rbg-light), 0.5);
     opacity: 0.5;
     input {

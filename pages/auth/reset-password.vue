@@ -1,10 +1,20 @@
 <template>
   <section class="reset-pass-page flex items-center justify-center py-10 px-4 h-full">
-    <div class="bg-card rounded-lg border-solid border-neutral-200 border w-full max-w-xl pt-14 px-4 md:px-10 pb-8 mx-auto shadow-xsmall">
+    <div
+      class="bg-card rounded-2xl border-solid border-neutral-200 border w-full max-w-xl pt-14 px-4 md:px-10 pb-8 mx-auto shadow-xsmall"
+    >
       <h1 class="text-neutral-900 text-center title title--h4 font-semibold mb-2">Recupere sua senha</h1>
-      <p class="text-neutral-600 text-center text-body-lg">Você precisa estar logado em uma conta para ter acesso aos dados de contato do profissional.</p>
+      <p class="text-neutral-600 text-center text-body-lg">
+        Você precisa estar logado em uma conta para ter acesso aos dados de contato do profissional.
+      </p>
 
-      <Form v-if="!successSend" @submit="getReset" :validation-schema="schema" autocomplete="on" class="flex flex-col gap-6 mt-8">
+      <Form
+        v-if="!successSend"
+        @submit="getReset"
+        :validation-schema="schema"
+        autocomplete="on"
+        class="flex flex-col gap-6 mt-8"
+      >
         <FieldInput name="email" label="E-mail" type="email" placeholder="seu.email@email.com" autocomplete="email" />
 
         <Button block class="mt-2" :loading="loading"> Enviar e-mail </Button>
@@ -13,16 +23,23 @@
       <div v-else class="mt-10 p-4 border border-success-200 bg-success-50 rounded-md">
         <div v-if="successSend" class="w-full text-center mb-12">
           <div class="text-h4-s text-success-800">E-mail enviado</div>
-          <div class="text-body text-success-700 mt-2">Enviamos um e-mail com instruções para recuperação de senha.</div>
+          <div class="text-body text-success-700 mt-2">
+            Enviamos um e-mail com instruções para recuperação de senha.
+          </div>
         </div>
 
-        <Button :disabled="disabledNewReset" size="small" color="linkError" class="mx-auto" @click="newReset" round>Não recebi meu código</Button>
+        <Button :disabled="disabledNewReset" size="small" color="linkError" class="mx-auto" @click="newReset" round
+          >Não recebi meu código</Button
+        >
         <div class="w-full text-center text-body-sm text-neutral-600">Aguarde {{ seconds }} segundos antes</div>
       </div>
 
       <div class="rounded-md pt-2 pr-3 pb-2 pl-3 flex flex-row gap-2 items-center justify-center mt-20">
         <div class="text-center relative text-action-sm text-neutral-600">
-          <span>Ainda, não tem uma conta? <NuxtLink to="/auth/register" class="text-primary"> Cadastre-se aqui</NuxtLink></span>
+          <span
+            >Ainda, não tem uma conta?
+            <NuxtLink to="/auth/register" class="text-primary"> Cadastre-se aqui</NuxtLink></span
+          >
         </div>
       </div>
     </div>

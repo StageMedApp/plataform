@@ -5,14 +5,28 @@
         <div class="card-head">
           <div>
             <h3 class="title title--card-sm">Criar estação</h3>
-            <p class="subtitle subtitle--card-sm">Pesquise por um caso que deseja, depois escolha uma pessoa para realizar a estação.</p>
+            <p class="subtitle subtitle--card-sm">
+              Pesquise por um caso que deseja, depois escolha uma pessoa para realizar a estação.
+            </p>
           </div>
           <Button size="small" @click="show = true">Ver estações</Button>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <FieldAutocomplete name="case" label="Caso a ser tratado" route="stations" v-model="activityTask" placeholder="Procure uma atividade" />
-          <FieldAutocomplete name="user" label="Procurar pessoa" route="users" v-model="activityUser" placeholder="Procure uma atividade" />
+          <FieldAutocomplete
+            name="case"
+            label="Caso a ser tratado"
+            route="stations"
+            v-model="activityTask"
+            placeholder="Procure uma atividade"
+          />
+          <FieldAutocomplete
+            name="user"
+            label="Procurar pessoa"
+            route="users"
+            v-model="activityUser"
+            placeholder="Procure uma atividade"
+          />
         </div>
 
         <div class="flex flex-col gap-2" v-if="activityTask.name || activityUser.name">
@@ -47,7 +61,11 @@
 
                 <div class="flex items-start gap-5">
                   <div class="relative shrink-0">
-                    <span v-if="activityUser.status == 'online'" class="absolute bg-green-500 right-0 top-0 z-10 h-2 aspect-square rounded-full"> </span>
+                    <span
+                      v-if="activityUser.status == 'online'"
+                      class="absolute bg-green-500 right-0 top-0 z-10 h-2 aspect-square rounded-full"
+                    >
+                    </span>
                     <img :src="activityUser.picture" class="h-10 w-10 rounded-full object-cover" />
                   </div>
                   <div class="text-sm grow">
@@ -57,7 +75,9 @@
                     </div>
 
                     <div class="flex mt-6" v-if="currentUser.following.includes(activityUser._id)">
-                      <Button size="tiny" @click="loadUserHistory(activityUser._id)" :loading="loadingUser"> Ver histórico </Button>
+                      <Button size="tiny" @click="loadUserHistory(activityUser._id)" :loading="loadingUser">
+                        Ver histórico
+                      </Button>
                     </div>
                   </div>
                 </div>
@@ -65,7 +85,9 @@
             </div>
           </div>
 
-          <Button class="!px-12 mx-auto mt-12" v-if="activityTask.name && activityUser.name" @click="startStation"> Iniciar estação </Button>
+          <Button class="!px-12 mx-auto mt-12" v-if="activityTask.name && activityUser.name" @click="startStation">
+            Iniciar estação
+          </Button>
         </div>
       </div>
     </div>
@@ -75,8 +97,16 @@
     <!-- Modal history -->
     <TransitionRoot as="template" :show="showHistory">
       <Dialog as="div" class="relative z-10" @close="showHistory = false">
-        <TransitionChild as="template" enter="ease-out duration-300" enter-from="opacity-0" enter-to="opacity-100" leave="ease-in duration-200" leave-from="opacity-100" leave-to="opacity-0">
-          <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+        <TransitionChild
+          as="template"
+          enter="ease-out duration-300"
+          enter-from="opacity-0"
+          enter-to="opacity-100"
+          leave="ease-in duration-200"
+          leave-from="opacity-100"
+          leave-to="opacity-0"
+        >
+          <div class="fixed inset-0 bg-neutral-500 bg-opacity-75 transition-opacity" />
         </TransitionChild>
 
         <div class="fixed inset-0 z-10 overflow-y-auto">
@@ -90,10 +120,12 @@
               leave-from="opacity-100 translate-y-0 sm:scale-100"
               leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <DialogPanel class="relative transform overflow-hidden rounded-lg bg-card text-left shadow-xl transition-all h-screen w-full md:max-w-[80vw] md:max-h-[80vh] max-h-[90vh] flex flex-col">
+              <DialogPanel
+                class="relative transform overflow-hidden rounded-2xl bg-card text-left shadow-xl transition-all h-screen w-full md:max-w-[80vw] md:max-h-[80vh] max-h-[90vh] flex flex-col"
+              >
                 <div class="p-4">
                   <div class="flex items-center justify-between gap-4">
-                    <div class="text-base font-semibold leading-6 text-gray-900">
+                    <div class="text-base font-semibold leading-6 text-neutral-900">
                       <h3>Histórico de {{ activityUser.name }}</h3>
                     </div>
 
@@ -108,7 +140,12 @@
                     <TabList class="flex space-x-1 rounded-xl p-1">
                       <Tab v-for="area in Object.keys(history)" as="template" :key="area" v-slot="{ selected }">
                         <button
-                          :class="['w-full rounded-lg py-2.5 text-body font-semibold  ', selected ? 'text-primary-700 bg-primary-100' : 'text-neutral-600 hover:bg-primary-50 hover:text-primary']"
+                          :class="[
+                            'w-full rounded-2xl py-2.5 text-body font-semibold  ',
+                            selected
+                              ? 'text-primary-700 bg-primary-100'
+                              : 'text-neutral-600 hover:bg-primary-50 hover:text-primary',
+                          ]"
                         >
                           {{ area }}
                         </button>
@@ -117,21 +154,29 @@
 
                     <TabPanels class="mt-4 grow overflow-y-auto">
                       <TabPanel v-for="(area, idx) in Object.values(history)" :key="idx">
-                        <table class="w-full divide-y-2 divide-gray-200 bg-white text-sm">
+                        <table class="w-full divide-y-2 divide-neutral-200 bg-white text-sm">
                           <thead class="text-left">
                             <tr>
-                              <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Nome</th>
-                              <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-center">Nota</th>
-                              <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-center">Media da estação</th>
+                              <th class="whitespace-nowrap px-4 py-2 font-medium text-neutral-900">Nome</th>
+                              <th class="whitespace-nowrap px-4 py-2 font-medium text-neutral-900 text-center">Nota</th>
+                              <th class="whitespace-nowrap px-4 py-2 font-medium text-neutral-900 text-center">
+                                Media da estação
+                              </th>
                               <th></th>
                             </tr>
                           </thead>
 
-                          <tbody class="divide-y divide-gray-200">
+                          <tbody class="divide-y divide-neutral-200">
                             <tr v-for="station in area" :key="station._id">
-                              <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{{ station.name }}</td>
-                              <td class="whitespace-nowrap px-4 py-2 text-gray-700 text-center">{{ station.userMedia ? station.userMedia : "x" }}</td>
-                              <td class="whitespace-nowrap px-4 py-2 text-gray-700 text-center">{{ station.datas?.media ? Number(station.datas?.media).toFixed(1) : "-" }}</td>
+                              <td class="whitespace-nowrap px-4 py-2 font-medium text-neutral-900">
+                                {{ station.name }}
+                              </td>
+                              <td class="whitespace-nowrap px-4 py-2 text-neutral-700 text-center">
+                                {{ station.userMedia ? station.userMedia : "x" }}
+                              </td>
+                              <td class="whitespace-nowrap px-4 py-2 text-neutral-700 text-center">
+                                {{ station.datas?.media ? Number(station.datas?.media).toFixed(1) : "-" }}
+                              </td>
                               <td class="whitespace-nowrap px-4 py-2 flex justify-end">
                                 <Button
                                   size="tiny"
@@ -160,8 +205,16 @@
     <!-- Modal all stations -->
     <TransitionRoot as="template" :show="show">
       <Dialog as="div" class="relative z-10" @close="closeModal">
-        <TransitionChild as="template" enter="ease-out duration-300" enter-from="opacity-0" enter-to="opacity-100" leave="ease-in duration-200" leave-from="opacity-100" leave-to="opacity-0">
-          <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+        <TransitionChild
+          as="template"
+          enter="ease-out duration-300"
+          enter-from="opacity-0"
+          enter-to="opacity-100"
+          leave="ease-in duration-200"
+          leave-from="opacity-100"
+          leave-to="opacity-0"
+        >
+          <div class="fixed inset-0 bg-neutral-500 bg-opacity-75 transition-opacity" />
         </TransitionChild>
 
         <div class="fixed inset-0 z-10 overflow-y-auto">
@@ -175,10 +228,12 @@
               leave-from="opacity-100 translate-y-0 sm:scale-100"
               leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <DialogPanel class="relative transform overflow-hidden rounded-lg bg-card text-left shadow-xl transition-all h-screen w-full md:max-w-[80vw] md:max-h-[80vh] max-h-[90vh] flex flex-col">
+              <DialogPanel
+                class="relative transform overflow-hidden rounded-2xl bg-card text-left shadow-xl transition-all h-screen w-full md:max-w-[80vw] md:max-h-[80vh] max-h-[90vh] flex flex-col"
+              >
                 <div class="p-4">
                   <div class="flex items-center justify-between gap-4">
-                    <div class="text-base font-semibold leading-6 text-gray-900">
+                    <div class="text-base font-semibold leading-6 text-neutral-900">
                       <h3>Estações</h3>
                     </div>
 
@@ -193,7 +248,12 @@
                     <TabList class="flex space-x-1 rounded-xl p-1">
                       <Tab v-for="area in Object.keys(stations)" as="template" :key="area" v-slot="{ selected }">
                         <button
-                          :class="['w-full rounded-lg py-2.5 text-body font-semibold  ', selected ? 'text-primary-700 bg-primary-100' : 'text-neutral-600 hover:bg-primary-50 hover:text-primary']"
+                          :class="[
+                            'w-full rounded-2xl py-2.5 text-body font-semibold  ',
+                            selected
+                              ? 'text-primary-700 bg-primary-100'
+                              : 'text-neutral-600 hover:bg-primary-50 hover:text-primary',
+                          ]"
                         >
                           {{ area }}
                         </button>
@@ -202,19 +262,23 @@
 
                     <TabPanels class="mt-4 grow overflow-y-auto">
                       <TabPanel v-for="(area, idx) in Object.values(stations)" :key="idx">
-                        <table class="w-full divide-y-2 divide-gray-200 bg-white text-sm">
+                        <table class="w-full divide-y-2 divide-neutral-200 bg-white text-sm">
                           <thead class="text-left">
                             <tr>
-                              <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Nome</th>
-                              <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Média</th>
+                              <th class="whitespace-nowrap px-4 py-2 font-medium text-neutral-900">Nome</th>
+                              <th class="whitespace-nowrap px-4 py-2 font-medium text-neutral-900">Média</th>
                               <th class="px-4 py-2"></th>
                             </tr>
                           </thead>
 
-                          <tbody class="divide-y divide-gray-200">
+                          <tbody class="divide-y divide-neutral-200">
                             <tr v-for="station in area" :key="station._id">
-                              <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{{ station.name }}</td>
-                              <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ station.datas?.media ? station.datas.media : "-" }}</td>
+                              <td class="whitespace-nowrap px-4 py-2 font-medium text-neutral-900">
+                                {{ station.name }}
+                              </td>
+                              <td class="whitespace-nowrap px-4 py-2 text-neutral-700">
+                                {{ station.datas?.media ? station.datas.media : "-" }}
+                              </td>
                               <td class="whitespace-nowrap px-4 py-2 flex justify-end">
                                 <Button
                                   size="tiny"
@@ -243,7 +307,17 @@
 </template>
 
 <script setup>
-import { TabGroup, TabList, Tab, TabPanels, TabPanel, Dialog, DialogPanel, TransitionChild, TransitionRoot } from "@headlessui/vue";
+import {
+  TabGroup,
+  TabList,
+  Tab,
+  TabPanels,
+  TabPanel,
+  Dialog,
+  DialogPanel,
+  TransitionChild,
+  TransitionRoot,
+} from "@headlessui/vue";
 import { useUserStore } from "~~/stores/user";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
@@ -364,7 +438,11 @@ async function startStation() {
   };
 
   if (newRooom.mentor_id == newRooom.user_id) {
-    Toast.error({ title: "Erro ao criar estação!", message: "Você não pode iniciar uma sala sozinho, pesquise outra pessoa como mentorado ou peça para um mentor preparar a estação." });
+    Toast.error({
+      title: "Erro ao criar estação!",
+      message:
+        "Você não pode iniciar uma sala sozinho, pesquise outra pessoa como mentorado ou peça para um mentor preparar a estação.",
+    });
   } else {
     let { data: room } = await store.post("users-stations", newRooom);
 

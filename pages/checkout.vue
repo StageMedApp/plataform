@@ -296,10 +296,10 @@ function reset() {
         <div class="container">
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             <div v-show="step == 1" class="lg:col-span-8 py-10">
-              <div class="bg-white rounded-lg border-neutral-200 border w-full relative shadow-xsmall flex flex-col">
+              <div class="bg-white rounded-2xl border-neutral-200 border w-full relative shadow-xsmall flex flex-col">
                 <div class="shrink-0 w-full relative flex gap-6 p-4">
                   <div
-                    class="shrink-0 h-14 aspect-square rounded-lg overflow-hidden flex items-center justify-center"
+                    class="shrink-0 h-14 aspect-square rounded-2xl overflow-hidden flex items-center justify-center"
                     :style="{ backgroundColor: plan.color }"
                   >
                     <Icon :name="plan.icon" size="28px" class="drop-shadow-md" />
@@ -330,7 +330,7 @@ function reset() {
                         v-for="benefit in plan.benefits"
                         :key="benefit"
                         class="flex space-x-3 items-center"
-                        :class="[!benefit.included && 'line-through decoration-gray-500']"
+                        :class="[!benefit.included && 'line-through decoration-neutral-500']"
                       >
                         <svg
                           class="flex-shrink-0 w-4 h-4"
@@ -351,7 +351,7 @@ function reset() {
               </div>
 
               <h3 class="text-neutral-900 text-left relative text-h5 font-semibold mb-3 mt-10">Seu endereço</h3>
-              <div class="bg-white rounded-lg border-neutral-200 border w-full relative shadow-xsmall flex flex-col">
+              <div class="bg-white rounded-2xl border-neutral-200 border w-full relative shadow-xsmall flex flex-col">
                 <div class="py-6 px-8 flex flex-row gap-3 items-center justify-start">
                   <div class="bg-neutral-50 rounded-full w-12 aspect-square flex items-center justify-center shrink-0">
                     <Icon name="solar:map-point-line-duotone" size="1.75em" class="text-primary text-xl" />
@@ -400,7 +400,7 @@ function reset() {
 
               <h3 class="text-neutral-900 text-left relative text-h5 font-semibold mb-3 mt-10">Dados do cartão</h3>
               <div
-                class="bg-white rounded-lg border-neutral-200 border w-full relative shadow-xsmall divide-y flex flex-col"
+                class="bg-white rounded-2xl border-neutral-200 border w-full relative shadow-xsmall divide-y flex flex-col"
               >
                 <div>
                   <input type="radio" v-model="paymentMethod" value="PIX" id="paymentMethodPix" class="peer hidden" />
@@ -576,7 +576,7 @@ function reset() {
 
               <div class="flex flex-col gap-3">
                 <div
-                  class="bg-white rounded-lg border-neutral-200 border w-full relative shadow-xsmall divide-y flex flex-col"
+                  class="bg-white rounded-2xl border-neutral-200 border w-full relative shadow-xsmall divide-y flex flex-col"
                 >
                   <div class="py-6 px-8 flex flex-row items-center justify-between w-full relative overflow-hidden">
                     <div class="flex flex-row gap-4 items-center">
@@ -596,7 +596,7 @@ function reset() {
                 </div>
 
                 <div
-                  class="bg-white rounded-lg border-neutral-200 border w-full relative shadow-xsmall divide-y flex flex-col"
+                  class="bg-white rounded-2xl border-neutral-200 border w-full relative shadow-xsmall divide-y flex flex-col"
                 >
                   <div class="py-6 px-8 flex flex-row items-center justify-between w-full relative overflow-hidden">
                     <div class="flex flex-row gap-4 items-center">
@@ -661,7 +661,7 @@ function reset() {
                 </div>
 
                 <div
-                  class="bg-white rounded-lg border-neutral-200 border w-full relative shadow-xsmall divide-y flex flex-col"
+                  class="bg-white rounded-2xl border-neutral-200 border w-full relative shadow-xsmall divide-y flex flex-col"
                 >
                   <div class="py-6 px-8 flex flex-row items-center justify-between w-full relative overflow-hidden">
                     <div class="flex flex-row gap-4 items-center">
@@ -784,7 +784,7 @@ function reset() {
           <div class="px-4 pb-6" v-if="adtional">
             <div
               v-if="paymentMethod == 'PIX' || paymentReturn.billingType == 'PIX'"
-              class="bg-white rounded-lg border-neutral-200 border shadow-xsmall p-8 md:p-10 w-full max-w-3xl mx-auto"
+              class="bg-white rounded-2xl border-neutral-200 border shadow-xsmall p-8 md:p-10 w-full max-w-3xl mx-auto"
             >
               <h3 class="text-neutral-900 relative text-h4 font-semibold mb-4">Passo a passo para pagar</h3>
 
@@ -831,7 +831,7 @@ function reset() {
 
             <div
               v-if="paymentMethod == 'BOLETO' || paymentReturn.billingType == 'BOLETO'"
-              class="bg-white rounded-lg border-neutral-200 border shadow-xsmall p-8 md:p-10 w-full max-w-3xl mx-auto"
+              class="bg-white rounded-2xl border-neutral-200 border shadow-xsmall p-8 md:p-10 w-full max-w-3xl mx-auto"
             >
               <h3 class="text-neutral-900 relative text-h4 font-semibold mb-4">Passo a passo para pagar</h3>
 
@@ -892,7 +892,9 @@ function reset() {
         <div class="bg-success-400 h-44 px-4 -mb-12"></div>
 
         <div class="px-4">
-          <div class="bg-white rounded-lg border-neutral-200 border shadow-xsmall p-8 md:p-10 w-full max-w-3xl mx-auto">
+          <div
+            class="bg-white rounded-2xl border-neutral-200 border shadow-xsmall p-8 md:p-10 w-full max-w-3xl mx-auto"
+          >
             <SvgoCheckCircle class="text-[52px] mx-auto text-success-600" />
 
             <h3 class="text-neutral-900 relative text-h4 font-semibold mt-10 mb-4 w-full text-center">
@@ -923,7 +925,9 @@ function reset() {
         <div class="bg-error-400 h-44 px-4 -mb-12"></div>
 
         <div class="px-4">
-          <div class="bg-white rounded-lg border-neutral-200 border shadow-xsmall p-8 md:p-10 w-full max-w-3xl mx-auto">
+          <div
+            class="bg-white rounded-2xl border-neutral-200 border shadow-xsmall p-8 md:p-10 w-full max-w-3xl mx-auto"
+          >
             <SvgoXCircle class="text-[52px] mx-auto text-error-600" />
 
             <h3 class="text-neutral-900 relative text-h4 font-semibold mt-10 mb-4 w-full text-center">

@@ -4,17 +4,17 @@
       <div v-if="showHistory" class="card mb-6">
         <div class="card-head">
           <div>
-            <h3 class="title title--card-sm">Histórico</h3>
-            <p class="subtitle subtitle--card-sm">Suas estações feitas anteriormente aparecerão aqui.</p>
+            <h3 class="title title--card-sm">Provas</h3>
           </div>
 
-          <FieldInput
-            hiddenLabel
-            v-model="searchValue"
-            name="search"
-            size="small"
-            placeholder="Pesquise um histórico"
-          />
+          <div class="flex justify-end items-center gap-2">
+            <Button size="small" color="link" title="Criar uma nova prova customizada" @click="newExameModal = true">
+              <Icon name="solar:document-medicine-line-duotone" /> Criar prova
+            </Button>
+            <Button size="small" title="Iniciar uma prova criada por nossos professores">
+              <Icon name="solar:documents-line-duotone" /> Iniciar prova
+            </Button>
+          </div>
         </div>
 
         <Vue3EasyDataTable
@@ -324,6 +324,147 @@
     </div>
 
     <div class="load-page" v-if="loading"></div>
+
+    <!-- Modal new exame -->
+    <TransitionRoot as="template" :show="newExameModal">
+      <Dialog as="div" class="relative z-10" @close="closeNewExameModa">
+        <TransitionChild
+          as="template"
+          enter="ease-out duration-300"
+          enter-from="opacity-0"
+          enter-to="opacity-100"
+          leave="ease-in duration-200"
+          leave-from="opacity-100"
+          leave-to="opacity-0"
+        >
+          <div class="fixed inset-0 bg-neutral-500 bg-opacity-75 transition-opacity" />
+        </TransitionChild>
+
+        <div class="fixed inset-0 z-10 overflow-y-auto">
+          <div class="flex min-h-full min-w-full items-center justify-center p-6 sm:p-0">
+            <TransitionChild
+              as="template"
+              enter="ease-out duration-300"
+              enter-from="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+              enter-to="opacity-100 translate-y-0 sm:scale-100"
+              leave="ease-in duration-200"
+              leave-from="opacity-100 translate-y-0 sm:scale-100"
+              leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+            >
+              <DialogPanel
+                class="relative transform overflow-hidden rounded-2xl bg-card text-left shadow-xl transition-all h-screen w-full md:max-w-[80vw] md:max-h-[80vh] max-h-[90vh] flex flex-col"
+              >
+                <div class="size-full grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div class="md:col-span-2 p-4">
+                    <h3 class="title title--card-sm mb-1">Provas</h3>
+                    <p class="subtitle subtitle--card-sm !mb-10">Crie sua prova, defina suas</p>
+
+                    <div class="relative mb-6">
+                      <label for="labels-range-input">Quantidade de questões</label>
+                      <input
+                        id="labels-range-input"
+                        type="range"
+                        value="20"
+                        min="10"
+                        max="100"
+                        step="10"
+                        :value="exameConfig.quetionsQtd"
+                        class="w-full h-2 bg-neutral-200 rounded-lg appearance-none cursor-pointer"
+                      />
+                      <div class="flex justify-between items-center">
+                        <span class="text-sm text-neutral-500"> 10 </span>
+                        <span class="text-sm text-neutral-500"> 20 </span>
+                        <span class="text-sm text-neutral-500"> 30 </span>
+                        <span class="text-sm text-neutral-500"> 40 </span>
+                        <span class="text-sm text-neutral-500"> 50 </span>
+                        <span class="text-sm text-neutral-500"> 60 </span>
+                        <span class="text-sm text-neutral-500"> 70 </span>
+                        <span class="text-sm text-neutral-500"> 80 </span>
+                        <span class="text-sm text-neutral-500"> 90 </span>
+                        <span class="text-sm text-neutral-500"> 100 </span>
+                      </div>
+                    </div>
+
+                    <label for="labels-range-input">Escolha as materias</label>
+
+                    <div class="flex flex-wrap -m-2">
+                      <div v-for="item in categorias" class="w-full sm:w-1/2 md:w-1/3 p-2">
+                        <div class="p-4 h-full bg-white border hover:border-neutral-200 rounded-lg cursor-pointer">
+                          <div class="flex flex-wrap items-center justify-between -m-2">
+                            <div class="w-auto p-2">
+                              <div class="flex flex-wrap items-center -m-1.5">
+                                <div class="w-auto">
+                                  <Icon :name="item.icon" size="24px" />
+                                </div>
+                                <div class="flex-1 px-2">
+                                  <h3 class="font-heading font-semibold">{{ item.name }}</h3>
+                                  <p class="text-xs text-neutral-500">{{ item.short }}</p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="w-auto p-1 flex gap-2 items-center bg-neutral-200/50 rounded-xl">
+                              <div v-if="exameConfig.quetions[item.id]" @click="removeCat(item)">
+                                <Icon name="solar:minus-square-line-duotone" size="20px" />
+                              </div>
+                              <span v-if="exameConfig.quetions[item.id]">{{ exameConfig.quetions[item.id] }}</span>
+                              <div @click="addCat(item)">
+                                <Icon name="solar:add-square-line-duotone" size="20px" />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="bg-neutral-100 flex flex-col rounded-2xl">
+                    <div class="pt-4 px-4 text-sm font-bold text-neutral-800">Previw da prova</div>
+                    <div class="grow flex flex-col gap-2 p-4">
+                      Sua prova terá {{ exameConfig.quetionsQtd }} questões, elas serão divididas nas materias abaixo
+
+                      <div
+                        v-for="(item, index) in exameConfig.quetions"
+                        :key="index"
+                        class="flex items-center w-full p-3 py-1 pl-4 pr-1 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+                      >
+                       
+                        {{ index }}
+                        {{ (item / exameConfig.quetionsTotal) * exameConfig.quetionsQtd }}
+                        <div class="grid ml-auto place-items-center justify-self-end">
+                          <button
+                            class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-blue-gray-500 transition-all hover:bg-blue-gray-500/10 active:bg-blue-gray-500/30 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                            type="button"
+                          >
+                            <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                class="w-5 h-5"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z"
+                                  clip-rule="evenodd"
+                                ></path>
+                              </svg>
+                            </span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flex gap-4 items-center justify-end px-4 pb-4">
+                      <Button size="small" color="linkError" @click="closeNewExameModa"> Cancelar </Button>
+                      <Button size="small"> Iniciar prova </Button>
+                    </div>
+                  </div>
+                </div>
+              </DialogPanel>
+            </TransitionChild>
+          </div>
+        </div>
+      </Dialog>
+    </TransitionRoot>
   </div>
 </template>
 
@@ -331,16 +472,18 @@
 import Vue3EasyDataTable from "vue3-easy-data-table";
 import "vue3-easy-data-table/dist/style.css";
 import {
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+  TabGroup,
+  TabList,
+  Tab,
+  TabPanels,
+  TabPanel,
   Dialog,
   DialogPanel,
   TransitionChild,
   TransitionRoot,
-  Popover,
-  PopoverButton,
-  PopoverPanel,
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
 } from "@headlessui/vue";
 import { useUserStore } from "~~/stores";
 import dayjs from "dayjs";
@@ -408,6 +551,35 @@ async function viewHis(his) {
 
 function getDayRelative(date) {
   return dayjs().to(dayjs(date));
+}
+
+const exameConfig = ref({
+  quetions: {},
+  quetionsTotal: 0,
+  quetionsQtd: 20,
+});
+const newExameModal = ref(false);
+const categorias = ref([
+  { id: "uid1", name: "categoria 1", icon: "solar:star-circle-line-duotone", short: "lorem ipsum" },
+  { id: "uid2", name: "categoria 2", icon: "solar:star-circle-line-duotone", short: "lorem ipsum" },
+  { id: "uid3", name: "categoria 3", icon: "solar:star-circle-line-duotone", short: "lorem ipsum" },
+  { id: "uid4", name: "categoria 4", icon: "solar:star-circle-line-duotone", short: "lorem ipsum" },
+  { id: "uid5", name: "categoria 5", icon: "solar:star-circle-line-duotone", short: "lorem ipsum" },
+  { id: "uid6", name: "categoria 6", icon: "solar:star-circle-line-duotone", short: "lorem ipsum" },
+]);
+function closeNewExameModa() {
+  newExameModal.value = false;
+}
+function addCat(item) {
+  exameConfig.value.quetionsTotal += 1;
+
+  if (exameConfig.value.quetions[item.id]) exameConfig.value.quetions[item.id] += 1;
+  else exameConfig.value.quetions[item.id] = 1;
+}
+function removeCat(item) {
+  if (exameConfig.value.quetionsTotal != 0) exameConfig.value.quetionsTotal -= 1;
+  if (exameConfig.value.quetions[item.id] != 0) exameConfig.value.quetions[item.id] -= 1;
+  else delete exameConfig.value.quetions[item.id];
 }
 </script>
 

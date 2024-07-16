@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseAPI = "http://127.0.0.1:4000/";
+const baseAPI = "https://api.stagemed.com.br/";
 
 export function getfull(url, params = null) {
   let setting = { method: "GET", url: url, params };

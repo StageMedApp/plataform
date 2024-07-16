@@ -10,19 +10,19 @@
               </div>
             </div>
 
-            <dl class="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:divide-x sm:divide-gray-100">
+            <dl class="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:divide-x sm:divide-neutral-100">
               <div class="flex flex-col px-4 pb-8 text-center">
-                <dt class="order-last text-sm font-medium text-gray-500">Estações Feitas</dt>
+                <dt class="order-last text-sm font-medium text-neutral-500">Estações Feitas</dt>
                 <dd class="text-4xl font-extrabold text-primary-600">{{ history.length || 0 }}</dd>
               </div>
 
               <div class="flex flex-col px-4 pb-8 text-center">
-                <dt class="order-last text-sm font-medium text-gray-500">Tempo médio</dt>
+                <dt class="order-last text-sm font-medium text-neutral-500">Tempo médio</dt>
                 <dd class="text-4xl font-extrabold text-primary-600">{{ calculateTime(timeArrays, true) }}</dd>
               </div>
 
               <div class="flex flex-col px-4 pb-8 text-center">
-                <dt class="order-last text-sm font-medium text-gray-500">Dias na plataforma</dt>
+                <dt class="order-last text-sm font-medium text-neutral-500">Dias na plataforma</dt>
                 <dd class="text-4xl font-extrabold text-primary-600">{{ currentDay.diff(resgiterDate, "d") }}</dd>
               </div>
             </dl>
@@ -58,15 +58,15 @@
             </div>
 
             <div class="flow-root">
-              <dl class="-my-3 divide-y divide-gray-100 text-sm">
-                <div class="grid grid-cols-1 gap-1 py-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
-                  <dt class="font-medium text-gray-900 sm:col-span-2">Tempo total fazendo Estações</dt>
-                  <dd class="text-gray-700 text-right">{{ calculateTime(timeArrays) }}</dd>
+              <dl class="-my-3 divide-y divide-neutral-100 text-sm">
+                <div class="grid grid-cols-1 gap-1 py-3 even:bg-neutral-50 sm:grid-cols-3 sm:gap-4">
+                  <dt class="font-medium text-neutral-900 sm:col-span-2">Tempo total fazendo Estações</dt>
+                  <dd class="text-neutral-700 text-right">{{ calculateTime(timeArrays) }}</dd>
                 </div>
 
-                <div class="grid grid-cols-1 gap-1 py-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
-                  <dt class="font-medium text-gray-900 sm:col-span-2">Tempo médio fazendo Estações</dt>
-                  <dd class="text-gray-700 text-right">{{ calculateTime(timeArrays, true) }}</dd>
+                <div class="grid grid-cols-1 gap-1 py-3 even:bg-neutral-50 sm:grid-cols-3 sm:gap-4">
+                  <dt class="font-medium text-neutral-900 sm:col-span-2">Tempo médio fazendo Estações</dt>
+                  <dd class="text-neutral-700 text-right">{{ calculateTime(timeArrays, true) }}</dd>
                 </div>
               </dl>
             </div>

@@ -72,8 +72,8 @@
       </div>
 
       <div class="pt-8 flex w-full items-end justify-between">
-        <p class="text-center text-xs/relaxed text-gray-500">© Stagemed 2023. Todos os direitos reservados</p>
-        <p class="text-center text-xs/relaxed text-gray-500">
+        <p class="text-center text-xs/relaxed text-neutral-500">© Stagemed 2023. Todos os direitos reservados</p>
+        <p class="text-center text-xs/relaxed text-neutral-500">
           Desenvolvido por
           <a href="https://nocsistemas.com" target="_blank" rel="noopener noreferrer">Noc sistemas</a>
         </p>

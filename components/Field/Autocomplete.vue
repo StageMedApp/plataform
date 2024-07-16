@@ -27,7 +27,7 @@
         >
           <div v-if="resultsLoading" class="load-content-tiny"></div>
           <div v-else>
-            <div v-if="results.length === 0" class="relative cursor-default select-none py-2 px-4 text-gray-700">
+            <div v-if="results.length === 0" class="relative cursor-default select-none py-2 px-4 text-neutral-700">
               Não encontrado.
             </div>
 

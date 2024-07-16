@@ -355,7 +355,7 @@
                               :key="benefit"
                               class="flex space-x-3 items-center"
                               :class="[
-                                !benefit.included && 'line-through decoration-gray-500',
+                                !benefit.included && 'line-through decoration-neutral-500',
                                 plan.isBest ? 'text-white' : 'text-primary-950',
                               ]"
                             >
@@ -448,8 +448,8 @@
       </div>
 
       <div class="pt-8 flex w-full items-end justify-between">
-        <p class="text-center text-xs/relaxed text-gray-500">© Stagemed 2023. Todos os direitos reservados</p>
-        <p class="text-center text-xs/relaxed text-gray-500">
+        <p class="text-center text-xs/relaxed text-neutral-500">© Stagemed 2023. Todos os direitos reservados</p>
+        <p class="text-center text-xs/relaxed text-neutral-500">
           Desenvolvido por
           <a href="https://nocsistemas.com" target="_blank" rel="noopener noreferrer">Noc sistemas</a>
         </p>

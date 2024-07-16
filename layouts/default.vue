@@ -45,6 +45,12 @@ const routesMenu = computed(() => {
       iconActive: "solar:archive-bold-duotone",
     },
     {
+      path: "/exame",
+      label: "Provas",
+      icon: "solar:document-line-duotone",
+      iconActive: "solar:document-bold-duotone",
+    },
+    {
       path: "/dash",
       label: "Meu desempenho",
       icon: "solar:chart-square-line-duotone",
@@ -163,9 +169,18 @@ const routesMenu = computed(() => {
             </div>
           </nav>
 
+          <div class="pt-3">
+            <NuxtLink to="/activity" class="menu-item new">
+              <div class="grid mr-4 place-items-center">
+                <Icon name="solar:add-circle-bold-duotone" size="24" />
+              </div>
+              Nova estação
+            </NuxtLink>
+          </div>
+
           <div
             v-if="user.current.plan == 'disabled'"
-            class="relative block w-full pl-4 pr-8 py-4 mt-auto text-base text-white bg-neutral-900 rounded-lg bg-gradient-to-br from-neutral-950 to-primary-800"
+            class="relative block w-full pl-4 pr-8 py-4 mt-4 text-base text-white bg-neutral-900 rounded-lg bg-gradient-to-br from-neutral-950 to-primary-800"
           >
             <Icon name="solar:crown-line-duotone" size="42px" class="stroke-1" />
             <h6 class="block mb-1 text-base antialiased font-semibold leading-relaxed tracking-normal">
@@ -182,7 +197,7 @@ const routesMenu = computed(() => {
           </div>
 
           <div class="pt-3">
-            <NuxtLink @click="store.logout()" class="menu-item exit">
+            <NuxtLink @click="store.logout()" class="menu-item exit cursor-pointer">
               <div class="grid mr-4 place-items-center">
                 <Icon name="solar:exit-line-duotone" />
               </div>
@@ -293,9 +308,18 @@ const routesMenu = computed(() => {
                               </div>
                             </nav>
 
+                            <div class="pt-3">
+                              <NuxtLink to="/activity" class="menu-item new">
+                                <div class="grid mr-4 place-items-center">
+                                  <Icon name="solar:add-circle-bold-duotone" size="24" />
+                                </div>
+                                Nova estação
+                              </NuxtLink>
+                            </div>
+
                             <div
                               v-if="user.current.plan == 'disabled'"
-                              class="relative block w-full pl-4 pr-8 py-4 mt-auto text-base text-white bg-neutral-900 rounded-lg bg-gradient-to-br from-neutral-950 to-primary-800"
+                              class="relative block w-full pl-4 pr-8 py-4 mt-4 text-base text-white bg-neutral-900 rounded-lg bg-gradient-to-br from-neutral-950 to-primary-800"
                             >
                               <Icon name="solar:crown-line-duotone" size="42px" class="stroke-1" />
                               <h6
@@ -375,6 +399,9 @@ const routesMenu = computed(() => {
   }
   &.user {
     @apply p-2 gap-3 overflow-hidden items-center;
+  }
+  &.new {
+    @apply bg-primary text-primary-50 active:bg-primary-400 h-10;
   }
   &.exit:hover {
     @apply bg-error-50 bg-opacity-80 text-error-900;

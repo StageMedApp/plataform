@@ -7,7 +7,14 @@
     <div class="content">
       <p>Compartilhe usando uma rede social</p>
       <div class="icons">
-        <a v-for="link in socialShareLinks" :href="link.url" :key="link.network" :class="[link.network]" target="_blank" rel="noopener noreferrer">
+        <a
+          v-for="link in socialShareLinks"
+          :href="link.url"
+          :key="link.network"
+          :class="[link.network]"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <!--
           <Whatsapp v-if="link.network == 'whatsapp'" />
             <Telegram v-if="link.network == 'telegram'" />
@@ -84,15 +91,15 @@ function copy(value) {
   transition: all 0.3s ease-in-out;
 }
 .header .close {
-  color: var(--color-gray-300);
+  color: var(--color-neutral-300);
   font-size: 16px;
   height: 32px;
   width: 32px;
   cursor: pointer;
 }
 .header .close:hover {
-  background: var(--color-gray-100);
-  color: var(--color-gray-400);
+  background: var(--color-neutral-100);
+  color: var(--color-neutral-400);
 }
 .social-modal .content {
   margin: 20px 0;

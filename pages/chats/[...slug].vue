@@ -177,7 +177,7 @@
               <div class="absolute right-0 items-center inset-y-0 flex">
                 <button
                   type="button"
-                  class="inline-flex items-center justify-center gap-2 rounded-lg px-4 py-3 transition duration-500 ease-in-out text-white bg-primary-500 hover:bg-primary-400 focus:outline-none"
+                  class="inline-flex items-center justify-center gap-2 rounded-2xl px-4 py-3 transition duration-500 ease-in-out text-white bg-primary-500 hover:bg-primary-400 focus:outline-none"
                   @click="sendMessage"
                 >
                   <span class="font-bold">Enviar</span>
@@ -211,7 +211,7 @@
           leave-from="opacity-100"
           leave-to="opacity-0"
         >
-          <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+          <div class="fixed inset-0 bg-neutral-500 bg-opacity-75 transition-opacity" />
         </TransitionChild>
 
         <div class="fixed inset-0 z-10 overflow-y-auto">
@@ -226,11 +226,11 @@
               leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <DialogPanel
-                class="relative transform overflow-hidden rounded-lg bg-card text-left shadow-xl transition-all w-full sm:max-w-lg max-h-[80vh] flex flex-col"
+                class="relative transform overflow-hidden rounded-2xl bg-card text-left shadow-xl transition-all w-full sm:max-w-lg max-h-[80vh] flex flex-col"
               >
                 <div class="p-4">
                   <div class="flex items-center justify-between gap-4">
-                    <div class="text-base font-semibold leading-6 text-gray-900">
+                    <div class="text-base font-semibold leading-6 text-neutral-900">
                       <h3>Nova conversa</h3>
                     </div>
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseAPI = "http://127.0.0.1:4000/";
+const baseAPI = "https://api.stagemed.com.br/";
 
 class Auth {
   async checkUser(user, create) {
