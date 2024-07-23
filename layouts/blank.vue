@@ -7,7 +7,7 @@ const router = useRouter();
 
 <template>
   <div class="auth-layout">
-    <header class="w-full h-16 bg-card border-b-[2px] border-neutral-100">
+    <header class="w-full h-16 bg-card border-b-[2px] border-neutral-100 sticky top-0 z-50">
       <div class="container flex flex-col justify-center items-center h-full gap-2">
         <div class="flex justify-between items-center w-full relative gap-6 py-2">
           <NuxtLink :to="localePath('/')" class="relative">

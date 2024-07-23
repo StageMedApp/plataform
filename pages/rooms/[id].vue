@@ -555,7 +555,7 @@ import {
 import { useUserStore, useGlobalStore } from "~~/stores";
 import VueEasyLightbox from "vue-easy-lightbox";
 import "vue-easy-lightbox/external-css/vue-easy-lightbox.css";
-
+import { push } from "notivue";
 import dayjs from "dayjs";
 
 definePageMeta({
@@ -566,7 +566,6 @@ useHead({
   title: "Estação",
 });
 
-const Toast = useState("toast").value;
 const store = useUserStore();
 const global = useGlobalStore();
 const config = useRuntimeConfig();
@@ -582,7 +581,7 @@ const roomId = route?.params?.id;
 const users = ref([]);
 
 if (!roomId) {
-  Toast.error("Informe uma sala para continuar ou crie uma");
+  push.error("Informe uma sala para continuar ou crie uma");
   router.push("/activity");
 }
 
@@ -591,7 +590,7 @@ await store.getAccessToken();
 const { data: room } = await store.get(`users-stations/${roomId}`);
 
 if (!room || room.finished_at) {
-  Toast.error("Está sala não existe ou ela foi finalizada.");
+  push.error("Está sala não existe ou ela foi finalizada.");
   router.push("/activity");
 }
 
@@ -673,7 +672,7 @@ socket.on("stationStop", (data) => {
 });
 
 socket.on("roomNotify", (data) => {
-  Toast.info(data.text);
+  push.info(data.text);
 });
 socket.on("updateAssessment", (data) => {
   assessment.value = data;

@@ -21,10 +21,6 @@ const props = defineProps({
     type: String,
   },
 
-  title: {
-    type: String,
-  },
-
   class: {
     type: String,
     default: "",
@@ -133,7 +129,6 @@ const componetsRender = computed(() => {
 
 const componetsBind = computed(() => {
   let bind = {
-    title: props.title || "Botão",
     disabled: props.loading || props.disabled,
     class: butonClass.value,
   };

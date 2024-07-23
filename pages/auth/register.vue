@@ -29,7 +29,9 @@
 
       <div class="grow w-full h-full flex flex-col">
         <div class="max-w-lg mx-auto grow" v-if="step == 1">
-          <h1 class="text-neutral-950 text-h2 font-semibold mb-1">{{ labels[step - 1].title }}</h1>
+          <h1 class="text-neutral-950 text-h2 font-semibold mb-1" @click="register('dffg')">
+            {{ labels[step - 1].title }}
+          </h1>
           <p class="text-neutral-600 text-body-lg">{{ labels[step - 1].description }}</p>
 
           <Form @submit="register" :validation-schema="schema" autocomplete="on" class="flex flex-col gap-4 mt-8">
@@ -449,10 +451,6 @@
 
       <div class="pt-8 flex w-full items-end justify-between">
         <p class="text-center text-xs/relaxed text-neutral-500">© Stagemed 2023. Todos os direitos reservados</p>
-        <p class="text-center text-xs/relaxed text-neutral-500">
-          Desenvolvido por
-          <a href="https://nocsistemas.com" target="_blank" rel="noopener noreferrer">Noc sistemas</a>
-        </p>
       </div>
     </div>
   </section>
@@ -466,13 +464,14 @@ import VOtpInput from "vue3-otp-input";
 import * as yup from "yup";
 import YupPassword from "yup-password";
 import { unmask } from "~~/helpers/mask";
+import { push } from "notivue";
+
 YupPassword(yup);
 
 definePageMeta({
   layout: "auth",
 });
 
-const Toast = useState("toast").value;
 const store = useUserStore();
 const router = useRouter();
 const route = useRoute();
@@ -489,7 +488,7 @@ if (code) {
     verify: "Verifique seu e-mail antes de continuar",
   };
 
-  Toast.info(codes[code]);
+  push.info(codes[code]);
 }
 
 const loading = ref(false);
@@ -527,13 +526,13 @@ async function continueGoogle() {
       (error) => {
         loadingGoogle.value = false;
         console.error(error);
-        Toast.error("Aconteceu algo de errado ao fazer cadastro");
+        push.error("Aconteceu algo de errado ao fazer cadastro");
       }
     )
     .catch((error) => {
       loadingGoogle.value = false;
       console.error(error);
-      Toast.error("Aconteceu algo de errado ao fazer cadastro");
+      push.error("Aconteceu algo de errado ao fazer cadastro");
     });
 }
 
@@ -552,7 +551,13 @@ function register(values) {
       },
       (error) => {
         loading.value = false;
-        Toast.error("Aconteceu algo de errado ao fazer cadastro");
+
+        if (error.code === "auth/email-already-in-use")
+          push.error({
+            title: "Está conta já está cadastrada",
+            message: "Faça login para acessar sua conta, se esqueceu sua senha faça o procedimento para recuperar.",
+          });
+        else push.error("Aconteceu algo de errado ao fazer seu cadastro, tente novamente ou entre em contato.");
       }
     )
     .catch((err) => {
@@ -669,6 +674,7 @@ const schemaStep2 = yup.object({
 });
 
 async function nextStep(values) {
+  console.log("testesetsts");
   loading.value = true;
 
   if (values.document) values.document = unmask(values.document, " .-/");
@@ -678,21 +684,20 @@ async function nextStep(values) {
   if (step.value == 3) values.finish = true;
 
   store
-    .post("users/next", values)
+    .path("users/next", values)
     .then(
       async () => {
         await store.fetchUser();
         step.value += 1;
+        loading.value = false;
       },
       (error) => {
-        Toast.error("Aconteceu algo de errado ao fazer cadastro");
+        push.error("Aconteceu algo de errado ao fazer cadastro");
         console.error("Erro ao fazer salvar step", error);
       }
     )
     .catch((err) => {
       console.log(err);
-    })
-    .complete(() => {
       loading.value = false;
     });
 }
@@ -709,7 +714,8 @@ function finishCode(value) {
   store
     .post("users/otp", { code: value })
     .then(async (res) => {
-      router.push("/");
+      step.value += 1;
+      loading.value = false;
     })
     .catch((err) => {
       loading.value = false;
@@ -724,11 +730,11 @@ function newCode() {
   store
     .get("users/otp")
     .then((res) => {
-      Toast.success("Novo código enviado para o seu email");
+      push.success("Novo código enviado para o seu email");
     })
     .catch((err) => {
       console.log(err);
-      Toast.error("Não conseguimos enviar um novo código para o seu email");
+      push.error("Não conseguimos enviar um novo código para o seu email");
     });
 
   loadingCode.value = false;

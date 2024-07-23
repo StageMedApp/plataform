@@ -36,15 +36,15 @@
 
 <script setup>
 import { useGlobalStore } from "~~/stores/global";
+import { push } from "notivue";
 
 const global = useGlobalStore();
-const Toast = useState("toast").value;
 const socialShareView = computed(() => global.socialShareValues);
 const socialShareLinks = computed(() => global.networks);
 
 function copy(value) {
   global.copyToClipboard(value);
-  Toast.success("Link copiado!!");
+  push.success("Link copiado!!");
 }
 </script>
 

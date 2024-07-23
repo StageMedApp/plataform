@@ -1,6 +1,7 @@
 <script setup>
 import { useUserStore, useGlobalStore, useNotificationStore } from "~~/stores";
 import { onAuthStateChanged } from "firebase/auth";
+import { Notivue, Notification, NotivueSwipe, push } from "notivue";
 
 useHead({
   titleTemplate: (title) => (title ? `${title} | Stagemed` : "Stagemed - Treine e Revalide sua residência"),
@@ -9,7 +10,6 @@ useHead({
 const auth = useState("auth").value;
 const socket = useState("socket").value;
 
-const Toast = useState("toast").value;
 const store = useUserStore();
 const notification = useNotificationStore();
 const global = useGlobalStore();
@@ -24,9 +24,10 @@ socket.on("notification", (data) => {
   if (data.type == "chat") {
     let pathArray = route.path.split("/");
     if (pathArray[pathArray.length - 1] != data.chatId) {
-      Toast.chat(data);
+      push.info(data);
+      //  Toast.chat(data);
     }
-  } else Toast.callToRoom(data);
+  } //else Toast.callToRoom(data);
 });
 
 socket.on("notificationReload", () => {
@@ -72,6 +73,13 @@ function reloadData() {
 <template>
   <div>
     <NuxtLoadingIndicator />
+
+    <Notivue v-slot="item">
+      <NotivueSwipe :item="item">
+        <NotificationInvite :item="item" v-if="item.props.isPostCreate" />
+        <Notification :item="item" v-else />
+      </NotivueSwipe>
+    </Notivue>
 
     <NuxtLayout>
       <NuxtPage />

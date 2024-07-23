@@ -6,7 +6,7 @@
           <div class="flex gap-6 flex-row items-center">
             <div class="relative w-20 shrink-0">
               <div class="relative h-20 w-20 aspect-square rounded-full overflow-hidden">
-                <img loading="lazy" :src="currentUser.pictureMedium" :alt="currentUser.name" />
+                <img loading="lazy" :src="currentUser?.pictureMedium || '123'" :alt="currentUser?.name" />
               </div>
 
               <div class="w-full mx-auto absolute -bottom-1">
@@ -15,33 +15,82 @@
             </div>
 
             <div>
-              <div class="text-neutral-900 text-left relative" style="font: var(--heading-4-semibold, 600 20px 'Plus Jakarta Sans', sans-serif)">Olá, {{ currentUser.name }}!</div>
-              <div class="text-neutral-600 text-left relative" style="font: var(--body-small-regular, 400 14px/21px 'Plus Jakarta Sans', sans-serif)">
+              <div
+                class="text-neutral-900 text-left relative"
+                style="font: var(--heading-4-semibold, 600 20px 'Plus Jakarta Sans', sans-serif)"
+              >
+                Olá, {{ currentUser.name }}!
+              </div>
+              <div
+                class="text-neutral-600 text-left relative"
+                style="font: var(--body-small-regular, 400 14px/21px 'Plus Jakarta Sans', sans-serif)"
+              >
                 {{ currentUser.tags ? currentUser.tags[0] : currentUser.email }}
               </div>
             </div>
           </div>
 
           <div class="flex flex-row gap-2 justify-end items-start">
+            <Button color="rounded" size="small" @click="newCover()"> Gerar </Button>
             <Button color="rounded" size="small" @click="profileEdit = true"> Editar perfil </Button>
           </div>
         </div>
       </div>
 
       <div class="card mt-6" v-show="profileEdit">
-        <Form @submit="profileSave" :validation-schema="profileSchema" :initial-values="profileValues" id="profile" :class="{ disabled: !profileEdit }">
+        <Form
+          @submit="profileSave"
+          :validation-schema="profileSchema"
+          :initial-values="profileValues"
+          id="profile"
+          :class="{ disabled: !profileEdit }"
+        >
           <div class="card-head">
             <h3 class="title title--card-sm">Meu Perfil</h3>
           </div>
           <div class="grid grid-cols-6 gap-4 mb-6">
-            <FieldInput class="col-span-6" name="name" label="Nome completo" type="text" placeholder="Digite o seu nome completo" />
+            <FieldInput
+              class="col-span-6"
+              name="name"
+              label="Nome completo"
+              type="text"
+              placeholder="Digite o seu nome completo"
+            />
 
-            <FieldSelect label="Sexo" class="col-span-3" name="gender" type="text" placeholder="Selecione" :options="genders" autocomplete="sex" />
+            <FieldSelect
+              label="Sexo"
+              class="col-span-3"
+              name="gender"
+              type="text"
+              placeholder="Selecione"
+              :options="genders"
+              autocomplete="sex"
+            />
             <FieldInput label="Data de nascimento" class="col-span-3" name="birthDay" type="date" />
-            <FieldInput label="CPF/CNPJ" mask="['###.###.###-##', '##.###.###/####-##']" class="col-span-3" name="document" type="text" placeholder="Digite seu CPF ou CNPJ" />
-            <FieldInput label="Número de telefone" mask="(##) 9####-####" class="col-span-3" name="phone" type="text" placeholder="Digite seu número de telefone" />
+            <FieldInput
+              label="CPF/CNPJ"
+              mask="['###.###.###-##', '##.###.###/####-##']"
+              class="col-span-3"
+              name="document"
+              type="text"
+              placeholder="Digite seu CPF ou CNPJ"
+            />
+            <FieldInput
+              label="Número de telefone"
+              mask="(##) 9####-####"
+              class="col-span-3"
+              name="phone"
+              type="text"
+              placeholder="Digite seu número de telefone"
+            />
 
-            <FieldInput class="col-span-6" name="tags[0]" label="Área de atuação" type="text" placeholder="Digite o sua area de atuação" />
+            <FieldInput
+              class="col-span-6"
+              name="tags[0]"
+              label="Área de atuação"
+              type="text"
+              placeholder="Digite o sua area de atuação"
+            />
           </div>
 
           <div class="line-options">
@@ -68,18 +117,36 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
           <div v-for="user in usersFollow" class="py-3 flex gap-2 items-center justify-start">
             <div class="relative shrink-0">
-              <span v-if="user.status == 'online'" class="absolute bg-green-500 right-0 top-0 z-10 h-2 aspect-square rounded-full"> </span>
+              <span
+                v-if="user.status == 'online'"
+                class="absolute bg-green-500 right-0 top-0 z-10 h-2 aspect-square rounded-full"
+              >
+              </span>
               <img class="w-12 h-12 rounded-full shrink-0" :src="user.picture" />
             </div>
             <div class="flex flex-col gap-0 items-start justify-start grow">
               <div class="text-neutral-800" style="font: 400 15px 'SF Pro Text', sans-serif">{{ user.name }}</div>
-              <div class="text-neutral" style="font: 300 15px 'SF Pro Text', sans-serif" v-if="user.tags && user.tags[0]">{{ user.tags[0] }}</div>
+              <div
+                class="text-neutral"
+                style="font: 300 15px 'SF Pro Text', sans-serif"
+                v-if="user.tags && user.tags[0]"
+              >
+                {{ user.tags[0] }}
+              </div>
             </div>
 
-            <Button v-if="!currentUser.followingAwait.includes(user._id) && !currentUser.following.includes(user._id)" size="tiny" color="secondary" class="!rounded-full" @click="follow(user._id)">
+            <Button
+              v-if="!currentUser.followingAwait.includes(user._id) && !currentUser.following.includes(user._id)"
+              size="tiny"
+              color="secondary"
+              class="!rounded-full"
+              @click="follow(user._id)"
+            >
               Seguir de volta
             </Button>
-            <Badge v-if="currentUser.followingAwait.includes(user._id)" class="!rounded-full"> Solicitado <Icon name="solar:clock-circle-line-duotone" size="14" /> </Badge>
+            <Badge v-if="currentUser.followingAwait.includes(user._id)" class="!rounded-full">
+              Solicitado <Icon name="solar:clock-circle-line-duotone" size="14" />
+            </Badge>
 
             <Button size="tiny" color="linkError" class="!rounded-full" icon @click="unfollow(user._id, true)">
               <Icon name="solar:close-circle-line-duotone" size="16" />
@@ -103,15 +170,27 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
           <div v-for="user in usersFollowing" class="py-3 flex gap-2 items-center justify-start">
             <div class="relative shrink-0">
-              <span v-if="user.status == 'online'" class="absolute bg-green-500 right-0 top-0 z-10 h-2 aspect-square rounded-full"> </span>
+              <span
+                v-if="user.status == 'online'"
+                class="absolute bg-green-500 right-0 top-0 z-10 h-2 aspect-square rounded-full"
+              >
+              </span>
               <img class="w-12 h-12 rounded-full shrink-0" :src="user.picture" />
             </div>
             <div class="flex flex-col gap-0 items-start justify-start grow">
               <div class="text-neutral-800" style="font: 400 15px 'SF Pro Text', sans-serif">{{ user.name }}</div>
-              <div class="text-neutral" style="font: 300 15px 'SF Pro Text', sans-serif" v-if="user.tags && user.tags[0]">{{ user.tags[0] }}</div>
+              <div
+                class="text-neutral"
+                style="font: 300 15px 'SF Pro Text', sans-serif"
+                v-if="user.tags && user.tags[0]"
+              >
+                {{ user.tags[0] }}
+              </div>
             </div>
 
-            <Button size="tiny" color="secondaryError" class="!rounded-full" @click="follow(user._id)"> Deixar de seguir </Button>
+            <Button size="tiny" color="secondaryError" class="!rounded-full" @click="follow(user._id)">
+              Deixar de seguir
+            </Button>
           </div>
         </div>
       </div>
@@ -125,6 +204,7 @@ import { useUserStore } from "~~/stores";
 import { Form } from "vee-validate";
 import * as yup from "yup";
 import { unmask } from "~~/helpers/mask";
+import { push } from "notivue";
 
 definePageMeta({
   title: "Editar perfil",
@@ -133,7 +213,6 @@ useHead({
   title: "Editar perfil",
 });
 
-const Toast = useState("toast").value;
 const config = useRuntimeConfig();
 const storage = useState("storage").value;
 
@@ -209,12 +288,12 @@ function profileSave(values) {
   store
     .update(values)
     .then(async () => {
-      Toast.success("Perfil alterado com sucesso!");
+      push.success("Perfil alterado com sucesso!");
       profileLoad.value = false;
       profileEdit.value = false;
     })
     .catch((err) => {
-      Toast.error("Perfil não alterado!");
+      push.error("Perfil não alterado!");
       profileLoad.value = false;
     });
 }
@@ -294,12 +373,12 @@ async function save(value) {
       .update(value)
       .then(async (res) => {
         store.fetchUser();
-        Toast.success("Foto de perfil alterada com sucesso!");
+        push.success("Foto de perfil alterada com sucesso!");
         pictureLoad.value = false;
       })
       .catch((err) => {
         console.error(err);
-        Toast.error("Foto de perfil não alterada!");
+        push.error("Foto de perfil não alterada!");
         pictureLoad.value = false;
       });
   }
@@ -324,5 +403,18 @@ async function upload(file, size = "normal") {
   return await getDownloadURL(uploadTask.ref).then((downloadURL) => {
     return downloadURL;
   });
+}
+async function newCover() {
+  await store
+    .get("images", {
+      collections: "965696",
+      orientation: "landscape",
+    })
+    .then(async (res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 }
 </script>

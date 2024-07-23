@@ -73,10 +73,6 @@
 
       <div class="pt-8 flex w-full items-end justify-between">
         <p class="text-center text-xs/relaxed text-neutral-500">© Stagemed 2023. Todos os direitos reservados</p>
-        <p class="text-center text-xs/relaxed text-neutral-500">
-          Desenvolvido por
-          <a href="https://nocsistemas.com" target="_blank" rel="noopener noreferrer">Noc sistemas</a>
-        </p>
       </div>
     </div>
 
@@ -90,13 +86,13 @@
 
 <script setup>
 import { useUserStore } from "~~/stores";
+import { push } from "notivue";
 import * as yup from "yup";
 
 definePageMeta({
   layout: "auth",
 });
 
-const Toast = useState("toast").value;
 const store = useUserStore();
 const router = useRouter();
 
@@ -120,7 +116,7 @@ function login(values) {
     (error) => {
       loading.value = false;
       console.error(error);
-      Toast.error("E-mail ou senha inválido");
+      push.error("E-mail ou senha inválido");
     }
   );
 }
@@ -135,13 +131,13 @@ async function continueGoogle() {
       (error) => {
         loadingGoogle.value = false;
         console.error(error);
-        Toast.error("Aconteceu algo de errado ao fazer login");
+        push.error("Aconteceu algo de errado ao fazer login");
       }
     )
     .catch((error) => {
       loadingGoogle.value = false;
       console.error(error);
-      Toast.error("Aconteceu algo de errado ao fazer login");
+      push.error("Aconteceu algo de errado ao fazer login");
     });
 }
 </script>

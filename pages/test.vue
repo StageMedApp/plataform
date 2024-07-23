@@ -7,7 +7,9 @@
           <Button block size="small" @click="stop"> Finalizar</Button>
           <div class="grow flex flex-nowrap gap-1 justify-center items-center">
             <Icon name="solar:clock-circle-bold-duotone" />
-            <span class="d-countdown font-mono text-body"> <span :style="`--value: ${minutes}`"></span>:<span :style="`--value: ${seconds}`"></span> </span>
+            <span class="d-countdown font-mono text-body">
+              <span :style="`--value: ${minutes}`"></span>:<span :style="`--value: ${seconds}`"></span>
+            </span>
           </div>
         </div>
 
@@ -20,7 +22,9 @@
 
       <div class="mt-1 text-body-sm flex items-center gap-2">
         Código da sala - {{ route?.params?.id }}
-        <Button icon size="tiny" color="link" @click="global.copyToClipboard(adtional.identificationField)"><Icon name="solar:copy-line-duotone" /></Button>
+        <Button icon size="tiny" color="link" @click="global.copyToClipboard(adtional.identificationField)"
+          ><Icon name="solar:copy-line-duotone"
+        /></Button>
       </div>
 
       <!-- Chat video -->
@@ -28,13 +32,25 @@
         <div class="w-full aspect-video bg-neutral-300">
           <video ref="remoteVideo" class="z-10" autoplay></video>
         </div>
-        <div v-show="isCameraOn" class="w-4/12 aspect-video bg-neutral-400 absolute top-0.5 right-0.5 rounded-md opacity-80 overflow-hidden">
+        <div
+          v-show="isCameraOn"
+          class="w-4/12 aspect-video bg-neutral-400 absolute top-0.5 right-0.5 rounded-md opacity-80 overflow-hidden"
+        >
           <video ref="localVideo" class="z-10" autoplay></video>
         </div>
 
         <div class="flex items-center justify-center gap-1 absolute bottom-1 left-0 w-full opacity-60 z-10">
-          <Button icon :color="isCameraOn ? 'primary' : 'secndary'" class="!shrink-0" size="tiny" @click="toggleCamera"><Icon name="solar:videocamera-record-line-duotone" /> </Button>
-          <Button icon :color="isMicrophoneOn ? 'primary' : 'secndary'" class="!shrink-0" size="tiny" @click="toggleMicrophone"><Icon name="solar:microphone-3-line-duotone" /> </Button>
+          <Button icon :color="isCameraOn ? 'primary' : 'secndary'" class="!shrink-0" size="tiny" @click="toggleCamera"
+            ><Icon name="solar:videocamera-record-line-duotone" />
+          </Button>
+          <Button
+            icon
+            :color="isMicrophoneOn ? 'primary' : 'secndary'"
+            class="!shrink-0"
+            size="tiny"
+            @click="toggleMicrophone"
+            ><Icon name="solar:microphone-3-line-duotone" />
+          </Button>
         </div>
       </div>
 
@@ -42,7 +58,11 @@
       <Disclosure defaultOpen v-slot="{ open }">
         <DisclosureButton class="flex w-full justify-between mt-2">
           <span>Conversa</span>
-          <Icon name="solar:alt-arrow-down-outline" :class="open ? 'rotate-180 transform' : ''" class="h-5 w-5 text-primary-500 transition" />
+          <Icon
+            name="solar:alt-arrow-down-outline"
+            :class="open ? 'rotate-180 transform' : ''"
+            class="h-5 w-5 text-primary-500 transition"
+          />
         </DisclosureButton>
         <DisclosurePanel>
           <div class="card-sm mt-2 !p-0 card-chat">
@@ -81,7 +101,6 @@ useHead({
   title: "Início",
 });
 
-const Toast = useState("toast").value;
 const store = useUserStore();
 const global = useGlobalStore();
 const config = useRuntimeConfig();

@@ -19,8 +19,8 @@ const router = useRouter();
 const route = useRoute();
 
 if (!user.value.isLoggedIn) router.push("/auth/login");
-if (store.loggedIn && !store.current?.account?.basic?.completed && !store.current?.emailVerified)
-  router.push("/auth/register");
+// if (store.loggedIn && !store.current?.account?.basic?.completed && !store.current?.emailVerified)
+//   router.push("/auth/register");
 
 const profileSideNav = ref(false);
 function showDrawer(status) {
@@ -40,7 +40,7 @@ const routesMenu = computed(() => {
 
     {
       path: "/history",
-      label: "Histórico de estações",
+      label: "Estações",
       icon: "solar:archive-line-duotone",
       iconActive: "solar:archive-bold-duotone",
     },

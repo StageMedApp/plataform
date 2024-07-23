@@ -4,7 +4,7 @@
       <div v-if="showHistory" class="card mb-6">
         <div class="card-head">
           <div>
-            <h3 class="title title--card-sm">Histórico</h3>
+            <h3 class="title title--card-sm">Estações</h3>
             <p class="subtitle subtitle--card-sm">Suas estações feitas anteriormente aparecerão aqui.</p>
           </div>
 
@@ -27,6 +27,7 @@
           :items="history"
           rows-of-page-separator-message="de"
           rows-per-page-message="Histórico por página"
+          v-if="history.length"
         >
           <template #item-datas.media="{ datas }">
             {{ datas.media ? Number(datas.media).toFixed(1) : "-" }}
@@ -50,11 +51,16 @@
               <Button v-if="!item.finished_at" disabled color="linkError" size="tiny"> Não foi concluída</Button>
             </div>
           </template>
-
-          <template #empty-message>
-            <CardEmpty type="list" to="/" />
-          </template>
         </Vue3EasyDataTable>
+
+        <div v-else>
+          <CardEmpty
+            type="list"
+            title="Faça sua primiera estação"
+            desc="Você ainda não fez nenhuma estação, convide um amigo e treine seus conhecimentos"
+            to="/activity"
+          />
+        </div>
       </div>
 
       <div v-if="!showHistory && station && selected">

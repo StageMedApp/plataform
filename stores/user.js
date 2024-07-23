@@ -60,6 +60,18 @@ export const useUserStore = defineStore("user", {
           });
       });
     },
+    async path(url, data) {
+      let token = await this.getAccessToken();
+      return new Promise((resolve, reject) => {
+        path(url, data, token)
+          .then((result) => {
+            resolve(result);
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });
+    },
     async get(url, data = null) {
       let token = await this.getAccessToken();
       return new Promise((resolve, reject) => {
@@ -209,7 +221,7 @@ export const useUserStore = defineStore("user", {
         .then(async (userCredential) => {
           var userCheck = { ...userCredential.user, ...user };
 
-          await this.fetchUser(userCheck);
+          await AuthService.setUser(userCheck);
           return Promise.resolve(true);
         })
         .catch((error) => {
@@ -240,7 +252,10 @@ export const useUserStore = defineStore("user", {
         const auth = getAuth();
         let token = await this.getAccessToken();
 
-        let userLoad = await AuthService.checkUser(user || { uid: this.current._id || this.current.uid, accessToken: token }, create);
+        let userLoad = await AuthService.checkUser(
+          user || { uid: this.current._id || this.current.uid, accessToken: token },
+          create
+        );
 
         this.current = {
           ...this.current,
@@ -297,7 +312,16 @@ export const useUserStore = defineStore("user", {
       storage: persistedState.localStorage,
     },
     {
-      paths: ["loggedIn", "expireAccessToken", "accessToken", "current.uid", "current.picture", "current.name", "current.emailVerified", "current.account"],
+      paths: [
+        "loggedIn",
+        "expireAccessToken",
+        "accessToken",
+        "current.uid",
+        "current.picture",
+        "current.name",
+        "current.emailVerified",
+        "current.account",
+      ],
       storage: persistedState.cookiesWithOptions({
         sameSite: "strict",
       }),

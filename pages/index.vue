@@ -20,8 +20,8 @@
                   <img
                     class="w-16 aspect-square rounded-full overflow-hidden"
                     loading="lazy"
-                    :src="currentUser.pictureMedium"
-                    :alt="currentUser.name"
+                    :src="currentUser?.pictureMedium || '123'"
+                    :alt="currentUser?.name"
                   />
                 </div>
                 <div>
@@ -276,13 +276,13 @@ import "@splidejs/splide/dist/css/themes/splide-skyblue.min.css";
 import "dayjs/locale/pt-br";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { Line } from "vue-chartjs";
+import { push } from "notivue";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 dayjs.extend(relativeTime);
 dayjs.locale("pt-br");
 
-const Toast = useState("toast").value;
 const store = useUserStore();
 const global = useGlobalStore();
 const config = useRuntimeConfig();
@@ -376,7 +376,7 @@ async function follow(id) {
       showItem.value = false;
       showItem.value = new Date();
     });
-  } else Toast.error("Voce nao pode se seguir");
+  } else push.error("Voce nao pode se seguir");
 
   loadingsId.value = [];
 }

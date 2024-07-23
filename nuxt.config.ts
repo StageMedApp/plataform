@@ -13,9 +13,14 @@ export default defineNuxtConfig({
       apiBase: process.env.NODE_ENV === "production" ? "https://api.stagemed.com.br/" : "http://127.0.0.1:4000/",
     },
   },
-  css: ["~/styles/_variables.scss", "~/styles/fonts.scss", "~/styles/global.scss"],
+  css: [
+    "~/styles/_variables.scss",
+    "~/styles/fonts.scss",
+    "~/styles/global.scss",
+    "notivue/notification.css", // Only needed if using built-in notifications
+    "notivue/animations.css", // Only needed if using built-in animations
+  ],
   ssr: false,
-
   modules: [
     ["@pinia/nuxt", { autoImports: ["defineStore"] }],
     "@pinia-plugin-persistedstate/nuxt",
@@ -27,8 +32,14 @@ export default defineNuxtConfig({
     "nuxt-api-party",
     "nuxt-icon",
     "nuxt-lodash",
+    "notivue/nuxt",
   ],
-
+  notivue: {
+    position: "top-right",
+    limit: 6,
+    enqueue: true,
+    avoidDuplicates: true,
+  },
   lodash: {
     prefix: "_",
   },

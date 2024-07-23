@@ -98,6 +98,7 @@ import { useUserStore } from "~~/stores";
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from "@headlessui/vue";
 import { Form, Field } from "vee-validate";
 import * as yup from "yup";
+import { push } from "notivue";
 
 const props = defineProps({
   show: {
@@ -122,7 +123,6 @@ function confirmeModal() {
   emit("confirme", true);
 }
 
-const Toast = useState("toast").value;
 const config = useRuntimeConfig();
 const store = useUserStore();
 const user = store.current;
@@ -131,7 +131,7 @@ const router = useRouter();
 const loading = ref(false);
 
 if (!store.loggedIn) {
-  Toast.error("Faça login para fazer uma avaliação!");
+  push.error("Faça login para fazer uma avaliação!");
   closeModal();
   router.push("/auth/login");
 }
@@ -172,11 +172,11 @@ async function save(values) {
     body: values,
   })
     .then((res) => {
-      Toast.success("Avaliação enviada com sucesso!");
+      push.success("Avaliação enviada com sucesso!");
       window.location.reload(true);
     })
     .catch((err) => {
-      Toast.error("Error ao enviar sua avaliação, tente novamente!");
+      push.error("Error ao enviar sua avaliação, tente novamente!");
     });
 
   confirmeModal();

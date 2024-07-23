@@ -66,6 +66,7 @@
 
 <script setup>
 import { useUserStore, useGlobalStore } from "~~/stores";
+import { push } from "notivue";
 
 definePageMeta({
   title: "Configurações",
@@ -74,7 +75,6 @@ useHead({
   title: "Configurações",
 });
 
-const Toast = useState("toast").value;
 const global = useGlobalStore();
 const store = useUserStore();
 var mergeUser = store.current;
@@ -111,10 +111,10 @@ async function settingsSave() {
     await store
       .update({ settings: values })
       .then(async (res) => {
-        Toast.success("Perfil alterado com sucesso!");
+        push.success("Perfil alterado com sucesso!");
       })
       .catch((err) => {
-        Toast.error("Perfil não alterado!");
+        push.error("Perfil não alterado!");
       });
   }
 }

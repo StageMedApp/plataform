@@ -322,6 +322,7 @@ import { useUserStore } from "~~/stores/user";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { push } from "notivue";
 dayjs.extend(relativeTime);
 dayjs.locale("pt-br");
 
@@ -335,7 +336,6 @@ useHead({
 const activityTask = ref({});
 const activityUser = ref({});
 
-const Toast = useState("toast").value;
 const store = useUserStore();
 const router = useRouter();
 const config = useRuntimeConfig();
@@ -438,7 +438,7 @@ async function startStation() {
   };
 
   if (newRooom.mentor_id == newRooom.user_id) {
-    Toast.error({
+    push.error({
       title: "Erro ao criar estação!",
       message:
         "Você não pode iniciar uma sala sozinho, pesquise outra pessoa como mentorado ou peça para um mentor preparar a estação.",

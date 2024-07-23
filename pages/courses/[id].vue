@@ -100,11 +100,11 @@ import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
 import relativeTime from "dayjs/plugin/relativeTime";
 import * as yup from "yup";
+import { push } from "notivue";
 
 dayjs.extend(relativeTime);
 dayjs.locale("pt-br");
 
-const Toast = useState("toast").value;
 const store = useUserStore();
 const config = useRuntimeConfig();
 const route = useRoute();
@@ -142,10 +142,10 @@ function sendComment(value, { resetForm }) {
     .then((result) => {
       resetForm();
       loadComments();
-      Toast.success("Comentario enviado");
+      push.success("Comentario enviado");
     })
     .catch((err) => {
-      Toast.error("Erro ao enviar comentario");
+      push.error("Erro ao enviar comentario");
     });
 }
 

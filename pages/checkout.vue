@@ -1,9 +1,11 @@
 <script setup>
+import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
 import { useUserStore, useGlobalStore } from "~~/stores";
 import * as yup from "yup";
 import { getPrice } from "~~/helpers";
 import { unmask } from "~~/helpers/mask";
 import dayjs from "dayjs";
+import { push } from "notivue";
 
 import "dayjs/locale/pt-br";
 dayjs.locale("pt-br");
@@ -12,7 +14,6 @@ definePageMeta({
   layout: "blank",
 });
 
-const Toast = useState("toast").value;
 const router = useRouter();
 const route = useRoute();
 const config = useRuntimeConfig();
@@ -226,14 +227,14 @@ async function loadPayment() {
           .catch((err) => {
             loading.value = false;
             console.log(err);
-            Toast.error("Erro ao recuperar informações dessa transação!");
+            push.error("Erro ao recuperar informações dessa transação!");
           });
       }
     })
     .catch((err) => {
       loading.value = false;
       console.log(err);
-      Toast.error("Erro ao recuperar informações dessa transação!");
+      push.error("Erro ao recuperar informações dessa transação!");
     });
 }
 
@@ -260,7 +261,7 @@ async function loadPaymentStatus() {
     })
     .catch((err) => {
       loading.value = false;
-      Toast.error("Pagamento não concluido!");
+      push.error("Pagamento não concluido!");
     });
 }
 
@@ -279,7 +280,7 @@ async function nextStep() {
       let creditCardValid = await creditCardForm.value.validate();
       if (creditCardValid.valid) step.value = 2;
     } else {
-      Toast.error("Escola um médoto de pagamento para continuar");
+      push.error("Escola um médoto de pagamento para continuar");
     }
   }
 }
@@ -296,7 +297,9 @@ function reset() {
         <div class="container">
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             <div v-show="step == 1" class="lg:col-span-8 py-10">
-              <div class="bg-white rounded-2xl border-neutral-200 border w-full relative shadow-xsmall flex flex-col">
+              <div
+                class="bg-white rounded-2xl border-neutral-200 border w-full relative shadow-small flex flex-col p-3"
+              >
                 <div class="shrink-0 w-full relative flex gap-6 p-4">
                   <div
                     class="shrink-0 h-14 aspect-square rounded-2xl overflow-hidden flex items-center justify-center"
@@ -317,36 +320,40 @@ function reset() {
                   </div>
                 </div>
 
-                <div class="px-6 d-collapse bg-base-200">
-                  <input type="checkbox" />
-                  <div
-                    class="d-collapse-title text-body-sm font-medium flex items-center gap-2 text-neutral pb-4 !cursor-pointer"
-                  >
-                    Detalhes do plano <Icon name="solar:add-circle-line-duotone" size="16" class="mt-0.5" />
-                  </div>
-                  <div class="d-collapse-content">
-                    <ul role="list" class="space-y-5 my-7">
-                      <li
-                        v-for="benefit in plan.benefits"
-                        :key="benefit"
-                        class="flex space-x-3 items-center"
-                        :class="[!benefit.included && 'line-through decoration-neutral-500']"
-                      >
-                        <svg
-                          class="flex-shrink-0 w-4 h-4"
-                          :class="[benefit.included ? 'text-secondary' : 'text-neutral-400']"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
+                <div class="px-3.5 pb-3">
+                  <Disclosure v-slot="{ open }">
+                    <DisclosureButton class="flex w-full items-center justify-between text-left">
+                      Detalhes do plano
+                      <Icon
+                        name="solar:alt-arrow-down-outline"
+                        :class="open ? 'rotate-180 transform' : ''"
+                        class="h-5 w-5 text-primary-500 transition"
+                      />
+                    </DisclosureButton>
+                    <DisclosurePanel class="px-2 pt-4 pb-2 text-sm text-neutral-500 flex flex-col gap-4 relative">
+                      <ul role="list" class="space-y-5">
+                        <li
+                          v-for="benefit in plan.benefits"
+                          :key="benefit"
+                          class="flex gap-3 items-center"
+                          :class="[!benefit.included && 'line-through decoration-neutral-500']"
                         >
-                          <path
-                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"
-                          />
-                        </svg>
-                        <span class="text-base font-normal leading-tight text-neutral">{{ benefit.name }}</span>
-                      </li>
-                    </ul>
-                  </div>
+                          <svg
+                            class="flex-shrink-0 w-4 h-4"
+                            :class="[benefit.included ? 'text-secondary' : 'text-neutral-400']"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"
+                            />
+                          </svg>
+                          <span class="text-base font-normal leading-tight text-neutral">{{ benefit.name }}</span>
+                        </li>
+                      </ul>
+                    </DisclosurePanel>
+                  </Disclosure>
                 </div>
               </div>
 
@@ -684,7 +691,7 @@ function reset() {
             </div>
 
             <div class="lg:col-span-4 bg-white py-10 lg:min-h-[calc(100vh_-_64px)]">
-              <div class="w-full py-4 px-6">
+              <div class="w-full py-4 px-6 sticky top-20">
                 <div class="w-full">
                   <div class="text-neutral-900 text-left text-body font-semibold">Resumo de Assinatura</div>
                 </div>
@@ -700,23 +707,27 @@ function reset() {
                     <div class="text-neutral-600 text-right text-body font-semibold">-{{ getPrice(discount) }}</div>
                   </div>
 
-                  <div class="px-2 d-collapse bg-base-200">
-                    <input type="checkbox" />
-                    <div
-                      class="d-collapse-title text-body-sm font-medium flex items-center gap-2 text-neutral pt-2 pb-1 !cursor-pointer"
-                    >
-                      Adicionar Cupom
-                    </div>
-                    <div class="d-collapse-content">
-                      <FieldInput
-                        size="small"
-                        name="cupom"
-                        :loading="cupomLoading"
-                        hidden-label
-                        :value="cupom"
-                        @update:model-value="search"
-                      />
-                    </div>
+                  <div class="px-1 mt-2">
+                    <Disclosure v-slot="{ open }">
+                      <DisclosureButton class="flex w-full items-center justify-between text-left">
+                        Adicionar Cupom
+                        <Icon
+                          :name="open ? 'solar:minus-circle-outline' : 'solar:add-circle-outline'"
+                          :class="open ? 'rotate-180 transform' : ''"
+                          class="h-5 w-5 transition text-neutral-600"
+                        />
+                      </DisclosureButton>
+                      <DisclosurePanel class="px-2 pt-4 pb-2 text-sm text-neutral-500 flex flex-col gap-4 relative">
+                        <FieldInput
+                          size="small"
+                          name="cupom"
+                          :loading="cupomLoading"
+                          hidden-label
+                          :value="cupom"
+                          @update:model-value="search"
+                        />
+                      </DisclosurePanel>
+                    </Disclosure>
                   </div>
                 </div>
 

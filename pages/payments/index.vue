@@ -293,7 +293,6 @@ const config = useRuntimeConfig();
 const store = useUserStore();
 const user = store.current;
 const router = useRouter();
-const Toast = useState("toast").value;
 
 const currentUser = computed(() => store.currentUser);
 

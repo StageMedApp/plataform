@@ -27,6 +27,7 @@
           :items="history"
           rows-of-page-separator-message="de"
           rows-per-page-message="Histórico por página"
+          v-if="history.length"
         >
           <template #item-datas.media="{ datas }">
             {{ datas.media ? Number(datas.media).toFixed(1) : "-" }}
@@ -50,11 +51,18 @@
               <Button v-if="!item.finished_at" disabled color="linkError" size="tiny"> Não foi concluída</Button>
             </div>
           </template>
-
-          <template #empty-message>
-            <CardEmpty type="list" to="/" />
-          </template>
         </Vue3EasyDataTable>
+
+        <div v-else>
+          <CardEmpty
+            type="empty"
+            action="Iniciar prova"
+            title="Vamos testar seu conhecimento?"
+            desc="Você ainda não fez nenhuma prova, crie uma nova ou inicie uma existente"
+            img="/images/empty/search.svg"
+            @goAction="newExameModal = true"
+          />
+        </div>
       </div>
 
       <div v-if="!showHistory && station && selected">
@@ -427,7 +435,6 @@
                         :key="index"
                         class="flex items-center w-full p-3 py-1 pl-4 pr-1 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
                       >
-                       
                         {{ index }}
                         {{ (item / exameConfig.quetionsTotal) * exameConfig.quetionsQtd }}
                         <div class="grid ml-auto place-items-center justify-self-end">
@@ -516,10 +523,11 @@ const showHistory = ref(true);
 const searchField = ["usersInfo.station", "area", "created_at"];
 const searchValue = ref("");
 const headers = [
-  { text: "Estação", value: "usersInfo.station", sortable: true, width: 200 },
-  { text: "Área", value: "area", sortable: true },
+  { text: "ID", value: "usersInfo.station", sortable: true, width: 200 },
+  { text: "Matérias", value: "area", sortable: true },
   { text: "Data", value: "created_at", sortable: true },
   { text: "Tempo", value: "datas.time", sortable: true },
+  { text: "Questões", value: "datas.questions", sortable: true },
   { text: "Nota", value: "datas.media", sortable: true },
   { text: "", value: "actions" },
 ];
