@@ -31,7 +31,6 @@
           </div>
 
           <div class="flex flex-row gap-2 justify-end items-start">
-            <Button color="rounded" size="small" @click="newCover()"> Gerar </Button>
             <Button color="rounded" size="small" @click="profileEdit = true"> Editar perfil </Button>
           </div>
         </div>

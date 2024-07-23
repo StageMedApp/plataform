@@ -334,7 +334,7 @@
     <div class="load-page" v-if="loading"></div>
 
     <!-- Modal new exame -->
-    <TransitionRoot as="template" :show="newExameModal">
+    <TransitionRoot as="template" :show="false">
       <Dialog as="div" class="relative z-10" @close="closeNewExameModa">
         <TransitionChild
           as="template"
